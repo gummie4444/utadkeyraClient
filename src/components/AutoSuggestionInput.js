@@ -1,0 +1,217 @@
+import Autosuggest from 'react-autosuggest';
+import React from 'react';
+import PropTypes from 'prop-types';
+import Location from './Icons/Location';
+import CloseIcon from './Icons/CloseIcon';
+/*
+    todo
+
+    - send suggestions in props
+    - have the value and selected stuff on the props
+    - control if it's open or not
+
+
+*/
+const theme = {
+    container: {
+      position: 'relative'
+    },
+    input: {
+      width: 240,
+      height: 30,
+      padding: '10px 20px 10px 40px',
+      fontFamily: 'Helvetica, sans-serif',
+      fontWeight: 300,
+      fontSize: 16,
+      border: '1px solid #aaa',
+      marginLeft:'-1px',
+
+    },
+    inputFocused: {
+      outline: 'none',
+      border: '1px solid #50E3C2',
+      boxShadow: '0 0 0 1px #50E3C2',
+
+    },
+    inputOpen: {
+      borderBottomLeftRadius: 0,
+      borderBottomRightRadius: 0
+    },
+    suggestionsContainer: {
+      display: 'none'
+    },
+    suggestionsContainerOpen: {
+      display: 'block',
+      position: 'absolute',
+      top: 51,
+      left:-1,
+      width: 300,
+      border: '1px solid #50E3C2',
+      backgroundColor: '#fff',
+      fontFamily: 'Helvetica, sans-serif',
+      fontWeight: 300,
+      fontSize: 16,
+      zIndex: 2,
+      boxShadow: '0 0 0 1px #50E3C2',
+    },
+    suggestionsList: {
+      margin: 0,
+      padding: 0,
+      listStyleType: 'none',
+    },
+    suggestion: {
+      cursor: 'pointer',
+      padding: '10px 20px'
+    },
+    suggestionHighlighted: {
+      backgroundColor: '#ddd'
+    }
+  };
+
+// Imagine you have a list of languages that you'd like to autosuggest.
+
+
+// Teach Autosuggest how to calculate suggestions for any given input value.
+const getSuggestions = (value, suggestions) => {
+  const inputValue = value.trim().toLowerCase();
+  const inputLength = inputValue.length;
+
+  return inputLength === 0 ? [] : suggestions.filter(lang =>
+    lang.name.toLowerCase().slice(0, inputLength) === inputValue
+  );
+};
+
+// When suggestion is clicked, Autosuggest needs to populate the input
+// based on the clicked suggestion. Teach Autosuggest how to calculate the
+// input value for every given suggestion.
+const getSuggestionValue = suggestion => suggestion.name;
+
+// Use your imagination to render suggestions.
+const renderSuggestion = suggestion => (
+  <div>
+    {suggestion.name}
+  </div>
+);
+
+
+const renderInputComponent = inputProps => (
+    <div className="inputContainer" style={{zIndex: inputProps.zIndex ? 300 : 2}}>
+      <div className="icon" >
+        <Location color={inputProps.iconColor} height="24" />
+      </div>
+      <input onFocus={inputProps.onFocus} {...inputProps} />
+
+      {inputProps.value && <CloseIcon click={(e) => inputProps.clearInput()} /> }
+        <style jsx>{`
+            .inputContainer {
+                position: relative;
+            }
+            .icon {
+                position: absolute;
+                top: 13px;
+                left: 10px;
+                width: 24px;
+                height: 24px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .icon svg{
+              height:24px;
+            }
+            `}
+        </style>
+    </div>
+  );
+
+export default class AutoSuggestInput extends React.Component {
+  constructor() {
+    super();
+    // Autosuggest is a controlled component.
+    // This means that you need to provide an input value
+    // and an onChange handler that updates this value (see below).
+    // Suggestions also need to be provided to the Autosuggest,
+    // and they are initially empty because the Autosuggest is closed.
+    this.state = {
+      value: '',
+      suggestions: [],
+      zIndex: false
+    };
+  }
+
+
+  // Autosuggest will call this function every time you need to update suggestions.
+  // You already implemented this logic above, so just use it.
+  onSuggestionsFetchRequested = ({ value }) => {
+    this.setState({
+      suggestions: getSuggestions(value, this.props.suggestions)
+    });
+  };
+  onFocus = () => {
+    console.log("onFocus");
+    this.setState({
+      zIndex: true
+    });
+  };
+  onBlur = () => {
+    this.setState({
+      zIndex: false
+    });
+  };
+
+  // Autosuggest will call this function every time you need to clear suggestions.
+  onSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: []
+    });
+  };
+  onSuggestionSelected = (e, {suggestion}) => {
+    console.log(suggestion,"currrentlySelected");
+    this.props.onSelect(suggestion);
+  };
+
+  render() {
+    const { suggestions } = this.state;
+
+    console.log(this.state,"state")
+    // Autosuggest will pass through all these props to the input.
+    const inputProps = {
+      placeholder: this.props.placeholder,
+      value: this.props.value,
+      onChange: this.props.onChange,
+      clearInput:this.props.onClear,
+      icon: this.props.icon,
+      iconColor: this.props.iconColor,
+      onFocus: this.onFocus,
+      onBlur: this.onBlur,
+      zIndex:this.state.zIndex
+    };
+
+    // Finally, render it!
+    return (
+      <Autosuggest
+        ref="test"
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        onSuggestionSelected={this.onSuggestionSelected}
+        getSuggestionValue={getSuggestionValue}
+        renderSuggestion={renderSuggestion}
+        inputProps={inputProps}
+        theme={theme}
+        renderInputComponent={renderInputComponent}
+        id={this.props.placeholder}
+      />
+    );
+  }
+}
+
+AutoSuggestInput.propTypes = {
+    placeholder: PropTypes.string,
+    onValueChange: PropTypes.func,
+    onSelect: PropTypes.func,
+    onClear:PropTypes.func,
+    suggestions: PropTypes.array,
+    value: PropTypes.string
+};

@@ -1,0 +1,30 @@
+#mainDateInput .DayPickerInput input{
+        width: 240px;
+        height: 30px;
+        padding: 10px 20px 10px 40px;
+        font-family: 'Helvetica, sans-serif';
+        font-weight: 300;
+        font-size: 16px;
+        border: 1px solid #aaa;
+        -webkit-appearance: textfield;
+        background-color: white;
+        -webkit-rtl-ordering: logical;
+        cursor: text;
+        margin-left:-1px;
+
+}
+
+#mainDateInput .DayPickerInput input:focus{
+    border: 1px solid #50E3C2;
+    outline:0;
+    z-index:400;
+
+}
+
+#mainDateInput .DayPickerInput-Overlay{
+    left:-1px;
+    border: 1px solid #50E3C2;
+    width:300px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+}

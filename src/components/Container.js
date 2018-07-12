@@ -1,0 +1,317 @@
+import React from 'react';
+import { Portal } from 'react-portal';
+import Measure from 'react-measure'
+
+import fetch from 'isomorphic-fetch';
+import config from '../setup/config.json';
+
+import TripsList from './TripsList';
+import Filter from './Filter';
+import TripDetailsModal from './TripDetailsModal';
+import CreateTripModal from './CreateTripModal/CreateTripModal';
+import CreateNewTripButton from './CreateNewTripButton';
+//import Headroom from 'react-headroom';
+export default class AutoSuggestInput extends React.Component {
+  constructor() {
+    super();
+    // Autosuggest is a controlled component.
+    // This means that you need to provide an input value
+    // and an onChange handler that updates this value (see below).
+    // Suggestions also need to be provided to the Autosuggest,
+    // and they are initially empty because the Autosuggest is closed.
+    this.state = {
+      cities:[],
+
+      fromValue: '',
+      from: null,
+      fromId: null,
+      dimensions: {
+        width: -1,
+        height: -1
+      },
+      toValue: '',
+      to: null,
+      toId:null,
+
+      width: -1,
+
+      currentDate: null,
+      currentUsableDate: '',
+      currentType: 1,
+
+      skip: 0,
+      amount: 20,
+
+      modalType:null,
+      isOpen: false,
+      currentTrip: null
+    };
+  }
+  componentDidMount() {
+    fetch(config.apiEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: '{ cities { name id } }' }),
+    })
+      .then(res => res.json())
+      .then(res => this.setState({ cities: res.data.cities }));
+  }
+
+  onDateChange = (day) => {
+    console.log("selected", day);
+        this.setState({
+            currentDate: day,
+            currentUsableDate: day === null ? '' : day,
+        });
+    };
+
+    onFromClear= () => {
+        this.onFromSelected({id: null});
+        this.setState({
+            fromValue: ''
+        });
+    }
+
+    onFromChange = (event, { newValue }) => {
+        console.log(event,newValue,"test---------FROM")
+        if(newValue.length === 0) {
+            this.onFromSelected({id: null});
+        }
+        this.setState({
+            fromValue: newValue
+        });
+    };
+
+    onFromSelected = (newValue) => {
+        this.setState({
+            fromId: newValue.id,
+            from: newValue.id === null ? null : newValue
+        });
+    };
+
+    onToClear= () => {
+        this.onToSelected({id: null});
+        this.setState({
+            toValue: ''
+        });
+    }
+
+    onToChange = (event, { newValue }) => {
+        if(newValue.length === 0) {
+            this.onToSelected({id: null});
+        }
+        this.setState({
+            toValue: newValue
+        });
+    };
+
+    onToSelected = (newValue) => {
+        this.setState({
+            toId: newValue.id,
+            to: newValue.id === null ? null : newValue
+        });
+    };
+
+    openTripDetails = (trip) => {
+        this.setState({
+            modalType: 'tripDetailsModal',
+            isOpen: true,
+            currentTrip: trip
+        })
+    };
+
+    openCreateTrip = () => {
+        this.setState({
+            modalType: 'createTripModal',
+            isOpen: true
+        })
+    };
+
+    outsideClick = (e) => {
+        e.preventDefault();
+
+        if(this.state.isOpen) {
+            this.setState({
+                modalType: null,
+                isOpen: false,
+                currentTrip: null
+            })
+        }
+    };
+
+  render() {
+    const currentModal = () => {
+        if(this.state.isOpen) {
+            switch(this.state.modalType) {
+                case 'createTripModal': {
+                    return (
+                        <Portal><CreateTripModal cities={this.state.cities} outsideClick={this.outsideClick}/></Portal>
+                    );
+                }
+
+                case 'tripDetailsModal': {
+                    return (
+                        <Portal><TripDetailsModal trip={this.state.currentTrip} outsideClick={this.outsideClick}/></Portal>
+                    );
+                }
+                default:
+                    return null
+            }
+        }
+        return null;
+    }
+
+    const preLines = () => {
+        const count = Math.floor((this.state.dimensions.width !== -1 ? this.state.dimensions.width : 100) /100);
+        const array = [...Array(count).keys()];
+        console.log(array,count,"count", this.state.dimensions.width/100)
+
+        return array;
+    }
+    console.log(this.state,"state");
+
+    console.log(currentModal, "test")
+    return (
+      <div className="container">
+        <span className="headerStyle"> 
+        <Measure
+        bounds
+        onResize={(contentRect) => {
+          this.setState({ dimensions: contentRect.bounds })
+        }}
+      >
+        {({ measureRef }) =>
+          <div className="headerStyleLine" ref={measureRef} >
+            { 
+             this.state.dimensions.width !== -1 && <div className="headerStyleFade">{preLines().map(t => ' - ')}</div>
+            }
+          </div>
+        }
+      </Measure>
+
+        <span>Út að keyra</span>
+        <div className="headerStyleLine">
+            { 
+             this.state.dimensions.width !== -1 && <div className="headerStyleFade">{preLines().map(t => ' - ')}</div>
+            }
+        </div>
+        <span className="headerStyleMini">         Making carpooling in Iceland great again</span>
+ </span>
+        <CreateNewTripButton click={this.openCreateTrip} />
+        <Filter {...this.state} onFromChange={this.onFromChange} onFromSelected={this.onFromSelected} onFromClear={this.onFromClear} onToChange={this.onToChange} onToSelected={this.onToSelected} onToClear={this.onToClear} onDateChange={this.onDateChange} />
+        <div className="tripHeader">
+              <div className="tripHeaderItem tripHeaderItemType">
+                
+              </div>
+              <div className="tripHeaderItem tripHeaderItemFrom">
+                From
+              </div>
+              <div className="tripHeaderItem tripHeaderItemTo">
+                To
+              </div>
+              <div className="tripHeaderItem tripHeaderItemSeats">
+                Seats
+              </div>
+              <div className="tripHeaderItem tripHeaderItemDate">
+                Date
+              </div>
+            </div>
+        <TripsList openPortal={this.openTripDetails} to={this.state.to} from={this.state.from} fromId={this.state.fromId} toId={this.state.toId} date={this.state.currentDate} skip={this.state.skip} amount={this.state.amount} />
+        {currentModal()}
+        <style jsx>{`
+            .container {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;                
+            }
+            .headerStyle {
+                text-shadow: 2px 2px 0 rgba(0,0,0,0.23);
+                font-size: 112px;
+                margin: 40px;
+                font-variant-caps: all-small-caps;
+                text-align: center;
+                background: #50e3c2;
+                color: white;
+                width: 100vw;
+                padding-top: 10px;
+                padding-bottom: 20px;
+                position:relative;
+                display:flex;
+            }
+            .headerStyleLine{
+                flex:1;
+                
+            }
+
+            .headerStyleFade{
+                animation: fadein 1s;
+            }
+            @keyframes fadein {
+                from { opacity: 0; }
+                to   { opacity: 1; }
+            }
+            
+            /* Firefox < 16 */
+            @-moz-keyframes fadein {
+                from { opacity: 0; }
+                to   { opacity: 1; }
+            }
+            
+            /* Safari, Chrome and Opera > 12.1 */
+            @-webkit-keyframes fadein {
+                from { opacity: 0; }
+                to   { opacity: 1; }
+            }
+            .headerStyleMini{
+                text-shadow: 1px 1px 0 rgba(0,0,0,0.23);
+                font-size: 24px;
+                position:absolute;
+                bottom:5px;
+                left:50%;
+                transform:translate(-50%,0);
+                color
+
+
+            }
+
+
+   
+            .tripHeader{
+                width:100%;
+                height:50px;
+                display:flex;
+                background: #50E3C2;
+                color:white;
+                position:sticky;
+                top:-1px;
+                box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+              }
+              .tripHeaderItem{
+                display:flex;
+                align-items:center;
+                margin-left:20px;
+                margin-right:20px;
+                font-variant-caps: all-small-caps;
+                font-size: 22px;
+              }
+              .tripHeaderItemFrom, .tripHeaderItemTo{
+                flex:6;
+              }
+              .tripHeaderItemType{
+                  flex:1;
+              }
+              .tripHeaderItemSeats{
+                  flex:3;
+              }
+              .tripHeaderItemDate{
+                flex:2;
+              }
+        `}
+        </style>
+
+      </div>
+    );
+  }
+}

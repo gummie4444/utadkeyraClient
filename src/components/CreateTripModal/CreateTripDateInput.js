@@ -6,6 +6,7 @@ import './CreateTripDateInput.css';
 import React from 'react';
 
 export default ({ date, onDateChange }) => (
+  
   <DayPickerInput
     dayPickerProps={{
         locale: 'is',

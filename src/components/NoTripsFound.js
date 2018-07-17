@@ -27,10 +27,6 @@ const getText = (from, to, date) => {
 export default ({ from, to, date }) => (
   <div style={{marginTop:'20px'}}>
     {getText(from, to, date)}
-    <style jsx>{`
-
-    `}
-    </style>
   </div>
 
 

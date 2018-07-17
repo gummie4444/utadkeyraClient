@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "nodemon -w server server/index.js"
+    "build:prod": "next build && next start",
+    "start": "next start",
+    "startDev": "nodemon -w server server/index.js"
   },
   "dependencies": {
     "@babel/preset-env": "^7.0.0-beta.46",

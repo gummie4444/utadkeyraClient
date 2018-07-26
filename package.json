@@ -6,7 +6,7 @@
     "build": "next build",
     "build:prod": "next build && next start",
     "start": "next start",
-    "startDev": "NODE_ENV=development nodemon -w server server/index.js",
+    "startDev": "NODE_ENV=development nodemon -w server server/index.js"
   },
   "dependencies": {
     "@babel/preset-env": "^7.0.0-beta.46",

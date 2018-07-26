@@ -17,8 +17,8 @@ export default class Filter extends React.Component {
   render() {
     return (
       <div className="filterContainer"> 
-        <AutoSuggestionInput icon="location" onClear={this.props.onFromClear} iconColor={colors.orange} placeholder="From" onChange={this.props.onFromChange} onSelect={this.props.onFromSelected} suggestions={this.props.cities} value={this.props.fromValue} />
-        <AutoSuggestionInput icon="location" onClear={this.props.onToClear} iconColor={colors.blue} placeholder="To" onChange={this.props.onToChange} onSelect={this.props.onToSelected} suggestions={this.props.cities} value={this.props.toValue} />
+        <AutoSuggestionInput icon="location" onClear={this.props.onFromClear} iconcolor={colors.orange} placeholder="From" onChange={this.props.onFromChange} onSelect={this.props.onFromSelected} suggestions={this.props.cities} value={this.props.fromValue} />
+        <AutoSuggestionInput icon="location" onClear={this.props.onToClear} iconcolor={colors.blue} placeholder="To" onChange={this.props.onToChange} onSelect={this.props.onToSelected} suggestions={this.props.cities} value={this.props.toValue} />
         <DateInput date={this.props.currentUsableDate} onDateChange={this.props.onDateChange} />
         <style jsx>
           {`

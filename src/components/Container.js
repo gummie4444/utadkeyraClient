@@ -48,7 +48,7 @@ export default class AutoSuggestInput extends React.Component {
     };
   }
   componentDidMount() {
-    fetch(config.apiEndpoint, {
+    fetch(process.env.NODE_ENV !== 'production' ? config.apiEndpoint : config.apiEndpointProd, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query: '{ cities { name id } }' }),
@@ -58,7 +58,6 @@ export default class AutoSuggestInput extends React.Component {
   }
 
   onDateChange = (day) => {
-    console.log("selected", day);
         this.setState({
             currentDate: day,
             currentUsableDate: day === null ? '' : day,
@@ -73,7 +72,6 @@ export default class AutoSuggestInput extends React.Component {
     }
 
     onFromChange = (event, { newValue }) => {
-        console.log(event,newValue,"test---------FROM")
         if(newValue.length === 0) {
             this.onFromSelected({id: null});
         }
@@ -128,7 +126,9 @@ export default class AutoSuggestInput extends React.Component {
     };
 
     outsideClick = (e) => {
-        e.preventDefault();
+        if(e) {
+            e.preventDefault();
+        }
 
         if(this.state.isOpen) {
             this.setState({
@@ -145,7 +145,13 @@ export default class AutoSuggestInput extends React.Component {
             switch(this.state.modalType) {
                 case 'createTripModal': {
                     return (
-                        <Portal><CreateTripModal cities={this.state.cities} outsideClick={this.outsideClick}/></Portal>
+                        <Portal><CreateTripModal 
+                            fromId={this.state.fromId}
+                            toId={this.state.toId}
+                            date={this.state.date}
+                            skip={this.state.skip}
+                            amount={this.state.amount}
+                        {...this.state} addNewItem={this.tripListRef.addNewItem} cities={this.state.cities} outsideClick={this.outsideClick}/></Portal>
                     );
                 }
 
@@ -164,39 +170,35 @@ export default class AutoSuggestInput extends React.Component {
     const preLines = () => {
         const count = Math.floor((this.state.dimensions.width !== -1 ? this.state.dimensions.width : 100) /100);
         const array = [...Array(count).keys()];
-        console.log(array,count,"count", this.state.dimensions.width/100)
 
         return array;
     }
-    console.log(this.state,"state");
 
-    console.log(currentModal, "test")
     return (
       <div className="container">
         <span className="headerStyle"> 
-        <Measure
-        bounds
-        onResize={(contentRect) => {
-          this.setState({ dimensions: contentRect.bounds })
-        }}
-      >
-        {({ measureRef }) =>
-          <div className="headerStyleLine" ref={measureRef} >
-            { 
-             this.state.dimensions.width !== -1 && <div className="headerStyleFade">{preLines().map(t => ' - ')}</div>
-            }
-          </div>
-        }
-      </Measure>
-
-        <span>Út að keyra</span>
-        <div className="headerStyleLine">
-            { 
-             this.state.dimensions.width !== -1 && <div className="headerStyleFade">{preLines().map(t => ' - ')}</div>
-            }
-        </div>
-        <span className="headerStyleMini">         Making carpooling in Iceland great again</span>
- </span>
+            <Measure
+            bounds
+            onResize={(contentRect) => {
+            this.setState({ dimensions: contentRect.bounds })
+            }}
+            >
+                {({ measureRef }) =>
+                <div className="headerStyleLine" ref={measureRef} >
+                    { 
+                    this.state.dimensions.width !== -1 && <div className="headerStyleFade">{preLines().map(t => ' - ')}</div>
+                    }
+                </div>
+                }
+            </Measure>
+            <span>Út að keyra</span>
+            <div className="headerStyleLine">
+                { 
+                this.state.dimensions.width !== -1 && <div className="headerStyleFade">{preLines().map(t => ' - ')}</div>
+                }
+            </div>
+            <span className="headerStyleMini">         Making carpooling in Iceland great again</span>
+        </span>
         <CreateNewTripButton click={this.openCreateTrip} />
         <Filter {...this.state} onFromChange={this.onFromChange} onFromSelected={this.onFromSelected} onFromClear={this.onFromClear} onToChange={this.onToChange} onToSelected={this.onToSelected} onToClear={this.onToClear} onDateChange={this.onDateChange} />
         <div className="tripHeader">
@@ -215,8 +217,8 @@ export default class AutoSuggestInput extends React.Component {
               <div className="tripHeaderItem tripHeaderItemDate">
                 Date
               </div>
-            </div>
-        <TripsList openPortal={this.openTripDetails} to={this.state.to} from={this.state.from} fromId={this.state.fromId} toId={this.state.toId} date={this.state.currentDate} skip={this.state.skip} amount={this.state.amount} />
+        </div>
+        <TripsList ref={instance => { this.tripListRef = instance; }} openPortal={this.openTripDetails} to={this.state.to} from={this.state.from} fromId={this.state.fromId} toId={this.state.toId} date={this.state.currentDate} skip={this.state.skip} amount={this.state.amount} />
         {currentModal()}
         <style jsx>{`
             .container {
@@ -288,6 +290,8 @@ export default class AutoSuggestInput extends React.Component {
                 top:-1px;
                 box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
               }
+
+
               .tripHeaderItem{
                 display:flex;
                 align-items:center;
@@ -308,6 +312,19 @@ export default class AutoSuggestInput extends React.Component {
               .tripHeaderItemDate{
                 flex:2;
               }
+
+              @media only screen and (max-width: 1200px) {
+                .tripHeaderItemType{
+                    flex:2;
+                }
+                .tripHeaderItemSeats{
+                    flex:2;
+                    justify-content:center;
+                }
+                .tripHeaderItemDate{
+                    justify-content:center; 
+                }
+              } 
         `}
         </style>
 

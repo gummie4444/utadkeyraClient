@@ -5,15 +5,35 @@ import CarDriving from '../Icons/CarDriving';
 import CreateTripDateInput from './CreateTripDateInput';
 import CreateTripSuggestInput from './CreateTripSuggestionInput';
 import CarSeatInput from './CreateTripSeatInput';
+import moment from 'moment';
 
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import Spinner from '../Spinner';
-
+import {tripsSkipQuery} from '../TripsList';
 const ADD_TODO = gql`
   mutation tripCreateClient($date: DateTime, $time:DateTime, $to:Int,$fromNew:String, $toNew:String $from:Int, $type: Int, $tripDetails: tripDetailsInputType) {
     tripCreateClient(date: $date, time: $time, to:$to, fromNew:$fromNew, toNew: $toNew, from:$from, type: $type, tripDetails:$tripDetails) {
-      id
+        id
+        time
+        type
+        fromCity {
+          id
+          name
+        }
+        toCity {
+          id
+          name
+        }
+        tripDetails {
+          name
+          email
+          mobile
+          phone
+          notes
+          seats
+          smokeStatus
+        }
     }
   }
 `;
@@ -45,7 +65,8 @@ export default class CreateTripModal extends React.Component {
 
       type: 1,
       hoverClicked:false,
-      typeHover:false
+      typeHover:false,
+      generalErrorMsg:null
 
     };
   }
@@ -101,14 +122,12 @@ export default class CreateTripModal extends React.Component {
     if(this.state.dateError){
         this.clearError('dateError', 'dateErrorMsg');
      }
-    console.log("selected", day);
       this.setState({
         date: day
       });
  };
   // SHITYY DO WITH CSS
   onHoverType = (event, type) => {
-      console.log("onOhverType", event, type)
         if(event === 'in' && !this.state.typeHover) {
             this.setState((prevState) => ({
                 type: type,
@@ -135,8 +154,6 @@ export default class CreateTripModal extends React.Component {
     }
     
     onClickType = (type) => {
-
-        console.log("onOhverType")
         this.setState({
             hoverClicked:true
         })
@@ -149,7 +166,6 @@ export default class CreateTripModal extends React.Component {
         });
     }
     onFromChange = (event, { newValue }) => {
-        console.log(event,newValue,"test---------FROM")
         if(this.state.fromError){
             this.clearError('fromError', 'fromErrorMsg');
 
@@ -205,6 +221,7 @@ export default class CreateTripModal extends React.Component {
     validateInfo = (cb) =>{
         let errorText = [];
         let error = false;
+        let generalErrorMsg = null;
         let dateError, toError, fromError, phoneError, emailError, nameError, seatsError, timeError = false;
         let dateErrorMsg, toErrorMsg, fromErrorMsg, phoneErrorMsg, emailErrorMsg, nameErrorMsg, seatsErrorMsg, timeErrorMsg = '';
         if(!this.state.date) {
@@ -270,9 +287,6 @@ export default class CreateTripModal extends React.Component {
             const between = this.state.time.substring(2,3);
             const m = this.state.time.substring(3,5);   
 
-            console.log(h,"H");
-            console.log(between,"between");
-            console.log(m,"m");
             if(this.state.time.length > 5){
                 error = true;
                 timeError = true;
@@ -318,7 +332,6 @@ export default class CreateTripModal extends React.Component {
         }
 
         
-        console.log(errorText,'errorText');
         this.setState({
             error,
             dateError,
@@ -338,6 +351,7 @@ export default class CreateTripModal extends React.Component {
             nameErrorMsg,
             seatsErrorMsg,
             timeErrorMsg,
+            generalErrorMsg
         })
 
         if(!error){
@@ -349,32 +363,93 @@ export default class CreateTripModal extends React.Component {
             {
             variables: {
                 date: this.state.date,
-                time: this.state.time, 
+                time: this.state.time === 'ANY' ? moment(moment(this.state.date).format('YYYY-MM-DD 23:59:59')).toDate() : moment(moment(this.state.date).format('YYYY-MM-DD ' + this.state.time)).toDate(), 
                 to: this.state.toId, 
                 toNew: this.state.toValue,
                 from: this.state.fromId,
                 fromNew: this.state.fromValue,
                 type: this.state.type, 
                 tripDetails:{ 
-                phone:this.state.phone, 
-                email: this.state.email, 
-                seats:this.state.seats, 
-                name: this.state.name, 
-                notes:this.state.notes
+                    phone:this.state.phone, 
+                    email: this.state.email, 
+                    seats:this.state.seats, 
+                    name: this.state.name, 
+                    notes:this.state.notes
                 }
             }
             }
-            console.log('payload', payload)
-            cb(payload).then(() => {setTimeout(() => this.setState({loading:false}),3000); console.log('there is a then after the thingy---')});
+
+            cb(payload).then((tag,error) => {
+                //Close the modal
+                console.log(error,"error", tag);
+                // call some function that reloads the whole thingy
+                // Call some function that adds this to the function
+                this.props.outsideClick();
+                this.setState({loading:false})
+
+            }).catch(e => {
+                console.log(e, "error22--");
+
+                this.setState({
+                    error: true,
+                    loading: false,
+                    generalErrorMsg: e.graphQLErrors[0].message,
+                });
+            });
         }
       }
   render() {
-    const { outsideClick, trip } = this.props;
+    const { outsideClick, trip, from, to, fromId, toId, date, skip, amount } = this.props;
     return (
       <div onClick={outsideClick} className="modalOverlay">
         <div onClick={event => event.stopPropagation()} className="modal">
           <span onClick={outsideClick} className="modalClose">&times;</span>
-          <Mutation mutation={ADD_TODO}>
+          <Mutation 
+            mutation={ADD_TODO}
+            update={(cache, {data}) => {
+                //TODO CLEANUP and use the real date variable
+
+                const data2 = cache.readQuery({ query: tripsSkipQuery, variables:{
+                    from: fromId,
+                    to: toId,
+                    date: date ? date : null,
+                    skip: skip,
+                    amount: amount,
+                  } });
+                  const currentTrips = data2.tripsSkip.trips;
+                  const shouldAdd = currentTrips.some(c => moment(c.time) > moment(data.tripCreateClient.time));
+
+                  //If should add add it to the apropreate locatin and shift the left items
+                  //else do nothing
+                  if(shouldAdd) {
+                    const newTripsSorted = data2.tripsSkip.trips.concat([data.tripCreateClient]).sort((a,b) => {
+                        if(moment(a.time) > moment(b.time)) {
+                            return 1;
+                        } else {
+                            return -1
+                        }
+                    } );
+                    const newTripSkip = Object.assign({}, data2.tripsSkip, {
+                        trips: newTripsSorted,
+                      });
+                      const test = Object.assign({}, data2, {
+                        // Append the new posts results to the old one
+                        tripsSkip: newTripSkip,
+                      });
+                    cache.writeQuery({
+                        query: tripsSkipQuery, 
+                        variables:{
+                            from: fromId,
+                            to: toId,
+                            date: date ? date : null,
+                            skip:skip,
+                            amount:amount,
+                        },
+                        data: test
+                    });
+                  }
+              }}
+          >
             {(createTrip, { loading, error }) => (
             <React.Fragment>
                 <div className="createTripModalHeader">
@@ -440,8 +515,14 @@ export default class CreateTripModal extends React.Component {
                     <div className="createTripModalNewButton" onClick={() => this.validateInfo(createTrip)}>
                         {this.state.loading ? <React.Fragment> <Spinner /></React.Fragment> : 'Create'}
                     </div>
+                    {this.state.error && this.state.generalErrorMsg &&
+                        <div className="createTripModalInputError">
+                            {this.state.generalErrorMsg}
+                        </div>
+                    } 
                 </div>
                 {this.state.loading && <div className="createTripModalLoadingOverlay"></div>}
+                
             </React.Fragment>
 
           )}
@@ -462,7 +543,20 @@ export default class CreateTripModal extends React.Component {
     animation: fadein 0.25s;
 }
 
-}
+.createTripModalInputError{
+    font-size: 13px;
+    margin-left: 5px;
+    color: white;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ff6b6b;
+    margin-right: 5px;
+    position:absolute;
+    top:-12px;
+  }
+
 @keyframes fadein {
   from { opacity: 0; }
   to   { opacity: 1; }
@@ -616,6 +710,7 @@ export default class CreateTripModal extends React.Component {
                 padding:10px;
                 border-bottom-left-radius: 4px;
                 border-bottom-right-radius: 4px;
+                position:relative;
             }
             .createTripModalNewButton{
                 background: #50E3C2;

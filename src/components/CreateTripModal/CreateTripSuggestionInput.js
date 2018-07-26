@@ -104,9 +104,9 @@ const renderSuggestion = suggestion => (
 
 
 const renderInputComponent = inputProps => (
-    <div className="inputContainer" style={{zIndex: inputProps.zIndex ? 300 : 2}}>
+    <div className="inputContainer" style={{zIndex: inputProps.zindex ? 300 : 2}}>
       <input autoFocus={inputProps.autoFocus} onFocus={inputProps.onFocus} {...inputProps} />
-      {inputProps.value && <CloseIcon click={(e) => inputProps.clearInput()} /> }
+      {inputProps.value && <CloseIcon click={(e) => inputProps.onClear()} /> }
         <style jsx>{`
             .inputContainer{
                 display:flex;
@@ -127,7 +127,7 @@ export default class CreateTripSuggestInput extends React.Component {
     this.state = {
       value: '',
       suggestions: [],
-      zIndex: false
+      zindex: false
     };
   }
 
@@ -140,14 +140,13 @@ export default class CreateTripSuggestInput extends React.Component {
     });
   };
   onFocus = () => {
-    console.log("onFocus");
     this.setState({
-      zIndex: true
+      zindex: true
     });
   };
   onBlur = () => {
     this.setState({
-      zIndex: false
+      zindex: false
     });
   };
 
@@ -171,12 +170,12 @@ export default class CreateTripSuggestInput extends React.Component {
       placeholder: this.props.placeholder,
       value: this.props.value,
       onChange: this.props.onChange,
-      clearInput:this.props.onClear,
+      onClear:this.props.onClear,
       icon: this.props.icon,
-      iconColor: this.props.iconColor,
+      iconcolor: this.props.iconcolor,
       onFocus: this.onFocus,
       onBlur: this.onBlur,
-      zIndex:this.state.zIndex,
+      zindex:this.state.zindex,
       autoFocus:this.props.focus
     };
 

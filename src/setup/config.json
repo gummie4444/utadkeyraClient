@@ -1,4 +1,6 @@
 {
-  "apiEndpoint": "http://167.99.207.70/api/graphql"
+  "apiEndpoint": "http://localhost:8000/graphql",
+  "apiEndpointProd": "http://167.99.207.70/api/graphql"
+
 }
   

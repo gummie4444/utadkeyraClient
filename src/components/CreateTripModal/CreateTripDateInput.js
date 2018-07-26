@@ -17,11 +17,7 @@ export default ({ date, onDateChange }) => (
     parseDate={parseDate}
     value={date}
     onDayChange={onDateChange}
-    inputProps={{
-      onFocus: () => console.log('focus'),
-      onBlur: () => console.log('blur'),
-    }
-    }
+    
   >
     <style jsx>{`
           .createTripModalInput {

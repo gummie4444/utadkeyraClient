@@ -16,21 +16,18 @@ export default class CarSeatInput extends React.Component {
   }
 
   onHover = (number) => {
-    console.log("onOhverType")
     this.setState({
         hovering: true,
         selected:number
     })
 }
   stopHover = (number) => {
-    console.log("onOhverType")
     this.setState({
         hovering: false,
         selected:this.props.carSeats
     })
 }
   clickItem = (number) => {
-    console.log("onOhverType")
     this.setState({
         hovering: false,
         selected: number

@@ -21,24 +21,24 @@ export default class DateInput extends React.Component {
     // Suggestions also need to be provided to the Autosuggest,
     // and they are initially empty because the Autosuggest is closed.
     this.state = {
-      zIndex: false
+      zindex: false
     };
   }
     onFocus = () => {
       console.log("onFocus");
       this.setState({
-        zIndex: true
+        zindex: true
       });
     };
     onBlur = () => {
       this.setState({
-        zIndex: false
+        zindex: false
       });
     };
     render() {
       const {date, onDateChange} = this.props;
       return (
-        <div className="inputContainer" id="mainDateInput" style={{zIndex: this.state.zIndex ? 300 : 2}}>
+        <div className="inputContainer" id="mainDateInput" style={{zIndex: this.state.zindex ? 300 : 2}}>
         <div className="icon">
           <Calendar color={colors.black} height={20} />
         </div>

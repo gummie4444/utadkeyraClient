@@ -95,13 +95,13 @@ const renderSuggestion = suggestion => (
 
 
 const renderInputComponent = inputProps => (
-    <div className="inputContainer" style={{zIndex: inputProps.zIndex ? 300 : 2}}>
+    <div className="inputContainer" style={{zIndex: inputProps.zindex ? 300 : 2}}>
       <div className="icon" >
-        <Location color={inputProps.iconColor} height="24" />
+        <Location color={inputProps.iconcolor} height="24" />
       </div>
       <input onFocus={inputProps.onFocus} {...inputProps} />
 
-      {inputProps.value && <CloseIcon click={(e) => inputProps.clearInput()} /> }
+      {inputProps.value && <CloseIcon click={(e) => inputProps.onClear()}/> }
         <style jsx>{`
             .inputContainer {
                 position: relative;
@@ -136,7 +136,7 @@ export default class AutoSuggestInput extends React.Component {
     this.state = {
       value: '',
       suggestions: [],
-      zIndex: false
+      zindex: false
     };
   }
 
@@ -149,14 +149,13 @@ export default class AutoSuggestInput extends React.Component {
     });
   };
   onFocus = () => {
-    console.log("onFocus");
     this.setState({
-      zIndex: true
+      zindex: true
     });
   };
   onBlur = () => {
     this.setState({
-      zIndex: false
+      zindex: false
     });
   };
 
@@ -167,25 +166,22 @@ export default class AutoSuggestInput extends React.Component {
     });
   };
   onSuggestionSelected = (e, {suggestion}) => {
-    console.log(suggestion,"currrentlySelected");
     this.props.onSelect(suggestion);
   };
 
   render() {
     const { suggestions } = this.state;
-
-    console.log(this.state,"state")
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
       placeholder: this.props.placeholder,
       value: this.props.value,
       onChange: this.props.onChange,
-      clearInput:this.props.onClear,
+      onClear:this.props.onClear,
       icon: this.props.icon,
-      iconColor: this.props.iconColor,
+      iconcolor: this.props.iconcolor,
       onFocus: this.onFocus,
       onBlur: this.onBlur,
-      zIndex:this.state.zIndex
+      zindex:this.state.zindex
     };
 
     // Finally, render it!

@@ -2,11 +2,13 @@ import React from 'react';
 
 export default ({ notes, name }) => (
   <div className="tripDetailsNote">
-    <div className="tripDetailsNoteText">
-      {notes}
-    </div>
+    {notes &&
+      <div className="tripDetailsNoteText">
+        {notes || 'No notes'}
+      </div>
+    }
     <div className="tripDetailsNoteName">
-      {name}
+      {name || 'N/A'}
     </div>
 
     <style jsx>{

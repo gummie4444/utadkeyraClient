@@ -21,7 +21,7 @@ import CloseIcon from '../Icons/CloseIcon';
             padding:5px;
             padding-top:10px;
             padding-bottom:10px;
-            font-size:16px;
+            font-size:17px;
 */
 const theme = {
     container: {
@@ -32,7 +32,7 @@ const theme = {
       margin:'5px',
       paddingTop: '10px',
       paddingBottom: '10px',
-      fontSize: 16,
+      fontSize: 17,
       border: '0',
       background:'#3aaf94',
       color:'white',
@@ -58,7 +58,7 @@ const theme = {
       backgroundColor: '#fff',
       fontFamily: 'Helvetica, sans-serif',
       fontWeight: 300,
-      fontSize: 16,
+      fontSize: 17,
       zIndex: 2,
       boxShadow: '0 0 0 1px #50E3C2',
       color:'black',

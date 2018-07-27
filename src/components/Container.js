@@ -241,6 +241,7 @@ export default class AutoSuggestInput extends React.Component {
                 padding-bottom: 20px;
                 position:relative;
                 display:flex;
+                margin-top:-25px;
             }
             .headerStyleLine{
                 flex:1;
@@ -314,6 +315,10 @@ export default class AutoSuggestInput extends React.Component {
               }
 
               @media only screen and (max-width: 1200px) {
+
+                .tripHeaderItem{
+                    font-size: 26px;
+                }
                 .tripHeaderItemType{
                     flex:2;
                 }

@@ -22,7 +22,7 @@ const theme = {
       padding: '10px 20px 10px 40px',
       fontFamily: 'Helvetica, sans-serif',
       fontWeight: 300,
-      fontSize: 16,
+      fontSize: 17,
       border: '1px solid #aaa',
       marginLeft:'-1px',
 
@@ -50,7 +50,7 @@ const theme = {
       backgroundColor: '#fff',
       fontFamily: 'Helvetica, sans-serif',
       fontWeight: 300,
-      fontSize: 16,
+      fontSize: 17,
       zIndex: 2,
       boxShadow: '0 0 0 1px #50E3C2',
     },

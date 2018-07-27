@@ -680,7 +680,7 @@ export default class CreateTripModal extends React.Component {
             padding:5px;
             padding-top:10px;
             padding-bottom:10px;
-            font-size:16px;
+            font-size:17px;
         }
         .createTripModalInputInput.long{
             height:100%;

@@ -12,6 +12,11 @@ export default ({ children }) => (
           'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New',
           monospace, serif;
       }
+      input[type='text'],
+input[type='number'],
+textarea {
+  font-size: 16px;
+}
       body {
         margin: 0;
         padding: 25px 50px;
@@ -141,6 +146,11 @@ export default ({ children }) => (
         }
         .closeIcon:after {
           transform: rotate(-45deg);
+        }
+        @media only screen and (max-width: 1200px) {
+          body{
+            padding:0;
+          }
         }
     `}
     </style>

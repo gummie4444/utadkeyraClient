@@ -129,6 +129,9 @@ export default ({ trip, index, openPortal }) => (
         .tripTime{
           justify-content:center;
         }
+        .tripContainer{
+          font-size:22px;
+        }
       } 
     `}
     </style>

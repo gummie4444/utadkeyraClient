@@ -10,6 +10,7 @@ import Filter from './Filter';
 import TripDetailsModal from './TripDetailsModal';
 import CreateTripModal from './CreateTripModal/CreateTripModal';
 import CreateNewTripButton from './CreateNewTripButton';
+
 //import Headroom from 'react-headroom';
 export default class AutoSuggestInput extends React.Component {
   constructor() {
@@ -168,7 +169,8 @@ export default class AutoSuggestInput extends React.Component {
     }
 
     const preLines = () => {
-        const count = Math.floor((this.state.dimensions.width !== -1 ? this.state.dimensions.width : 100) /100);
+        console.log(this.state.dimensions.width,"width")
+        const count = this.state.dimensions.width < 130 ? 2 : Math.floor((this.state.dimensions.width !== -1 ? this.state.dimensions.width : 100) / 100);
         const array = [...Array(count).keys()];
 
         return array;
@@ -201,9 +203,8 @@ export default class AutoSuggestInput extends React.Component {
         </span>
         <CreateNewTripButton click={this.openCreateTrip} />
         <Filter {...this.state} onFromChange={this.onFromChange} onFromSelected={this.onFromSelected} onFromClear={this.onFromClear} onToChange={this.onToChange} onToSelected={this.onToSelected} onToClear={this.onToClear} onDateChange={this.onDateChange} />
-        <div className="tripHeader">
+        <div className="tripHeader tripHeaderBig">
               <div className="tripHeaderItem tripHeaderItemType">
-                
               </div>
               <div className="tripHeaderItem tripHeaderItemFrom">
                 From
@@ -213,6 +214,16 @@ export default class AutoSuggestInput extends React.Component {
               </div>
               <div className="tripHeaderItem tripHeaderItemSeats">
                 Seats
+              </div>
+              <div className="tripHeaderItem tripHeaderItemDate">
+                Date
+              </div>
+        </div>
+        <div className="tripHeader tripHeaderSmall">
+              <div className="tripHeaderItem tripHeaderItemType">
+              </div>
+              <div className="tripHeaderItem tripHeaderItemDetails">
+                Details
               </div>
               <div className="tripHeaderItem tripHeaderItemDate">
                 Date
@@ -274,9 +285,7 @@ export default class AutoSuggestInput extends React.Component {
                 bottom:5px;
                 left:50%;
                 transform:translate(-50%,0);
-                color
-
-
+                
             }
 
 
@@ -291,7 +300,12 @@ export default class AutoSuggestInput extends React.Component {
                 top:-1px;
                 box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
               }
-
+              .tripHeaderBig{
+                  display:flex;
+              }
+              .tripHeaderSmall{
+                  display:none;
+              }
 
               .tripHeaderItem{
                 display:flex;
@@ -314,19 +328,48 @@ export default class AutoSuggestInput extends React.Component {
                 flex:2;
               }
 
-              @media only screen and (max-width: 1200px) {
-
-                .tripHeaderItem{
-                    font-size: 26px;
+              @media only screen and (max-width: 600px) {
+                  .tripHeader{
+                      height:40px;
+                  }
+                .headerStyleMini{
+                    display:none;
                 }
+                .headerStyle{
+                    font-size:40px;
+                    margin:0;
+                    margin-bottom: 20px;
+                    margin-top: -5px;
+                    padding:0;
+
+                    padding-bottom:10px;
+                    padding-top:10px;
+                }
+                .tripHeaderBig{
+                    display:none;
+                }
+                .tripHeaderSmall{
+                    display:flex;
+                }
+    
                 .tripHeaderItemType{
-                    flex:2;
+                    flex:5;
+                    margin-right: 20px;
+                    margin-left: 20px;
+                }
+                .tripHeaderItemDetails{
+                    flex:15;
+                    margin:0;
                 }
                 .tripHeaderItemSeats{
                     flex:2;
+                    
                     justify-content:center;
                 }
                 .tripHeaderItemDate{
+                    flex:4;
+                    margin-right:20px;
+                    margin-left:20px;
                     justify-content:center; 
                 }
               } 

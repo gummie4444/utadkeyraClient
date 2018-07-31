@@ -21,5 +21,3 @@ app.prepare().then(() => {
   }
   startServer();
 });
-
-

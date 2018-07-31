@@ -456,7 +456,7 @@ export default class CreateTripModal extends React.Component {
                     <span>new trip</span>
                 </div>
 
-                <div className="createTripModalMain">
+                <div className="createTripModalMain createTripModalMainBig">
                     <div className="createTripModalMainInputWrapper type">
                         <div className="createTripModalMainInputType" style={{ flex: 1 }}>
                             <div className={this.state.type === 1 ? 'createTripModalMainInputTypeWrap enabled' : 'createTripModalMainInputTypeWrap disabled'} onClick={() => this.onClickType(1)} onMouseLeave={() => this.onHoverType('out',1)} onMouseOver={() => this.onHoverType('in',1)}>
@@ -511,6 +511,59 @@ export default class CreateTripModal extends React.Component {
                     </div>
 
                 </div>
+                <div className="createTripModalMain createTripModalMainSmall">
+                    <div className="createTripModalMainInputWrapper type">
+                        <div className="createTripModalMainInputType" style={{ flex: 1 }}>
+                            <div className={this.state.type === 1 ? 'createTripModalMainInputTypeWrap enabled' : 'createTripModalMainInputTypeWrap disabled'} onClick={() => this.onClickType(1)} onMouseLeave={() => this.onHoverType('out',1)} onMouseOver={() => this.onHoverType('in',1)}>
+                            <div className="createTripModalMainInputIcon"><HitchikeIcon height={25} color={this.state.type === 1 ? 'white': 'gray'} /></div>
+                            <span className="createTripModalMainInputText">Passenger</span>
+                            </div>
+                        </div>
+                        <div className="createTripModalMainInputType" style={{ flex: 1 }}>
+                            <div className={this.state.type === 2 ? 'createTripModalMainInputTypeWrap enabled' : 'createTripModalMainInputTypeWrap disabled'} onClick={() => this.onClickType(2)} onMouseLeave={() => this.onHoverType('out',2)} onMouseOver={() => this.onHoverType('in',2)}>
+                                <div className="createTripModalMainInputIcon"><CarDriving  height ={20} width={35} color={this.state.type === 2 ? 'white': 'gray'}/></div>
+                                <span className="createTripModalMainInputText">Ride</span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <CreateTripInput  error={this.state.fromError} errorMsg={this.state.fromErrorMsg}   inputText="From">
+                        <CreateTripSuggestInput focus placeholder="" onChange={this.onFromChange} onSelect={this.onFromSelected} onClear={this.onFromClear} suggestions={this.props.cities} value={this.state.fromValue} />
+                    </CreateTripInput>
+                    <CreateTripInput  error={this.state.toError} errorMsg={this.state.toErrorMsg}  inputText="To">
+                        <CreateTripSuggestInput placeholder="" onChange={this.onToChange} onSelect={this.onToSelected} onClear={this.onToClear} suggestions={this.props.cities} value={this.state.toValue} />
+                    </CreateTripInput>
+                    <CreateTripInput error={this.state.nameError} errorMsg={this.state.nameErrorMsg} inputText="Name">
+                        <input className="createTripModalInputInput" onChange={this.onNameChange} value={this.state.name} />
+                    </CreateTripInput>
+                    <CreateTripInput  error={this.state.emailError} errorMsg={this.state.emailErrorMsg}  inputText="Email">
+                            <input  type="email" className="createTripModalInputInput" onChange={this.onEmailChange} value={this.state.email} />
+                    </CreateTripInput>
+                    <div style={{flex:1, flexDirection:'row', display:'flex'}}>
+                            <CreateTripInput  error={this.state.dateError} errorMsg={this.state.dateErrorMsg}  marginRight={6} inputText="Date">
+                                <CreateTripDateInput date={this.state.date} onDateChange={this.onDateChange}  />
+                            </CreateTripInput>
+                            <CreateTripInput helpText={'hh:mm or ANY'} error={this.state.timeError} errorMsg={this.state.timeErrorMsg} marginRight={6} inputText="Time">
+                                <input value={this.state.time} onChange={this.onTimeChange} style={{ paddingBottom:'3px', width: '100%',boxSizing:'border-box'}} className="createTripModalInputInput" type="string"/>
+                            </CreateTripInput>
+                        </div>
+                    
+                        <div clasName="createTripModalMainInputWrapperSmall" style={{flex:1, flexDirection:'row', display:'flex'}}>
+
+                            <CreateTripInput  error={this.state.phoneError} errorMsg={this.state.phoneErrorMsg}  inputText="Mobile">
+                                <input className="createTripModalInputInput mobileSpecial" onChange={this.onPhoneChange} value={this.state.phone} />
+                            </CreateTripInput>
+
+                            <CreateTripInput  error={this.state.seatsError} errorMsg={this.state.seatsErrorMsg}  inputText={this.state.type === 2 ? 'Seats available' : 'Seats needed'}>
+                                <CarSeatInput half click={this.onSelectCarSeats} carSeats={this.state.seats} />
+                            </CreateTripInput>
+                        </div>
+                    <CreateTripInput inputText="Notes">
+                        <textarea  onChange={this.onNotesChange} value={this.state.notes} className="createTripModalInputInput long" />
+                    </CreateTripInput>
+                </div>
+
+
                 <div className="createTripModalFooter">
                     <div className="createTripModalNewButton" onClick={() => this.validateInfo(createTrip)}>
                         {this.state.loading ? <React.Fragment> <Spinner /></React.Fragment> : 'Create'}
@@ -533,6 +586,9 @@ export default class CreateTripModal extends React.Component {
 
         <style jsx>
           {`
+          .createTripModalMainSmall{
+              display:none;
+          }
 .createTripModalLoadingOverlay{
     position:absolute;
     height:100%;
@@ -731,6 +787,48 @@ export default class CreateTripModal extends React.Component {
       
             .createTripModalNewButton:active{
               background:#3aaf94;
+            }
+            @media only screen and (max-width: 600px) {
+                .createTripModalMain{
+                    flex:1;
+                    margin-left: 10px;
+                    margin-right: 10px;
+                    margin-bottom: 10px;
+                }   
+                .createTripModalInputTitle{
+                    font-size:18px;
+                }
+                .createTripModalHeader{
+                    font-size:36px;
+                }
+                .createTripModalMainInputTypeWrap{
+                    height:40px;
+                    width:75px;
+                }
+                .createTripModalInputInput{
+                    margin:2px;
+                    padding-top:4px;
+                    padding-bottom:4px;
+                }
+                .mobileSpecial{
+                    max-width: calc(100vw/2 - 14px);
+                }
+                .createTripModalMainSmall{
+                    display:block;
+                }
+                .createTripModalMainBig{
+                    display:none;
+                }
+                .modal{
+                    height:100vh;
+
+                }
+            }
+            @media only screen and (min-height: 700px) and (max-width: 600px) {
+                .long{
+                    height:100px !important;
+                }
+
             }
           `}
         </style>

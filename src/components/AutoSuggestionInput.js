@@ -51,7 +51,7 @@ const theme = {
       fontFamily: 'Helvetica, sans-serif',
       fontWeight: 300,
       fontSize: 17,
-      zIndex: 2,
+      zIndex: 3,
       boxShadow: '0 0 0 1px #50E3C2',
     },
     suggestionsList: {
@@ -119,6 +119,18 @@ const renderInputComponent = inputProps => (
 
             .icon svg{
               height:24px;
+            }
+
+            @media only screen and (max-width: 600px) {
+              .inputContainer{
+                width: 100%;
+                display: flex;
+                margin-bottom:10px;
+              }
+              .inputContainer input{
+                flex:1;
+                margin-left:0 !important;
+              }
             }
             `}
         </style>

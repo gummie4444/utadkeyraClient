@@ -35,6 +35,7 @@ export default ({ outsideClick, trip }) => (
                 font-size:40px;
             }
 
+            
             `}
     </style>
   </div>

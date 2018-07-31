@@ -36,3 +36,22 @@
     width:300px;
     color:black;
 }
+
+@media only screen and (max-width: 600px) {
+    .createTripModalInput #react-autowhatever-{
+        top:30px !important;
+        left:2px !important;
+        border:none !important;
+        box-shadow:none !important;
+    }
+
+    #createTripInput .DayPickerInput-Overlay{
+        bottom:-40px;
+    }
+    #createTripInput .DayPickerInput input{    
+        padding-top:4px;
+        padding-bottom:4px;
+        font-size:16px;
+        margin:2px;
+    }
+}

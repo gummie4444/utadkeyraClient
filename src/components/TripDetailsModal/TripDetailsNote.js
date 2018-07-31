@@ -55,6 +55,30 @@ export default ({ notes, name }) => (
         font-size:17px;
         font-weight:700;
       }
+
+      @media only screen and (max-width: 600px) {
+        .tripDetailsNoteName{
+          margin-top:10px;
+        }
+        .tripDetailsNote{
+          margin-top:0px;
+        }
+
+        .tripDetailsNoteText{
+          text-align:center ;
+          margin-left:10px;
+          margin-right:10px;
+          margin-top:20px;
+        }
+        .tripDetailsNoteText:before{
+          left:-15px ;
+          top:-30px ;
+
+        }
+        .tripDetailsNoteText:after{
+          right:-5px ;
+        }
+      }
     `
     }
     </style>

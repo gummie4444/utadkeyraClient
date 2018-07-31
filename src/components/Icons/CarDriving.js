@@ -2,7 +2,7 @@
 import React from 'react';
 
 export default ({ color, height = '23', width='57' }) => (
-  <svg width={`${width}px`}  height={`${height}px`} viewBox="0 0 57 23" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <svg width={`${width}px`} height={`${height}px`} viewBox="0 0 57 23" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs />
   <g id="Page-3" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g id="Car-Driving" fill={color || "#000000"}>

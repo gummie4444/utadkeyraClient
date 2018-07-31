@@ -111,10 +111,20 @@ const renderInputComponent = inputProps => (
             .inputContainer{
                 display:flex;
             }
+            @media only screen and (max-width: 600px) {
+    
+             input{    
+                  padding-top:4px !important;
+                  padding-bottom:4px !important;
+                  font-size:16px !important;
+                  margin:2px !important;
+              }
+          }
             `}
         </style>
     </div>
   );
+//                  max-width: calc(100vw/2 - 28px);
 
 export default class CreateTripSuggestInput extends React.Component {
   constructor() {

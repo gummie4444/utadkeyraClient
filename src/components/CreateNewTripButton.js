@@ -28,6 +28,18 @@ export default ({ click }) => (
       .createNewTripButton:active{
         background:#3aaf94;
       }
+      @media only screen and (max-width: 600px) {
+        .createNewTripButton{
+
+        
+        right:15px;
+          bottom:15px;
+          height:60px;
+          width:60px;
+          font-size:34px;
+        }
+      }
+
     `}
     </style>
   </a>

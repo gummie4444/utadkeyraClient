@@ -31,6 +31,14 @@ export default class Filter extends React.Component {
                 .filterContainer > div:first-of-type input {
                     margin-left:0 !important;
                 }
+                @media only screen and (max-width: 600px) {
+
+                  .filterContainer{
+                    flex-direction:column;
+                    width:90%;
+                    box-shadow: none;
+                  }
+                }
             `}
         </style>
       </div>

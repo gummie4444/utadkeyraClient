@@ -147,9 +147,54 @@ textarea {
         .closeIcon:after {
           transform: rotate(-45deg);
         }
-        @media only screen and (max-width: 1200px) {
+        @media only screen and (max-width: 600px) {
           body{
             padding:0;
+          }
+
+          .createTripModalInput .closeIcon {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+
+          }
+
+          .createTripModalInput .closeIcon:before, .createTripModalInput .closeIcon:after {
+            position: absolute;
+            left: 15px;
+            content: ' ';
+            height: 15px;
+            width: 2px;
+            background-color: #333;
+          }
+          .modal{
+            max-width:100%;
+            width:100%;
+            box-sizing:border-box;
+            padding-right: 0;
+            padding-left: 0;
+            border-radius:0;
+          }
+          .tripDetailsTimeWrapper{
+            width:100vw !important;
+          }
+          .tripDetailsHeader{
+            width:100vw !important;
+            margin-bottom: 10px !important;
+            margin-top: 10px !important;
+            height: 50px !important;
+          }
+          .tripDetailsHeaderCityIcon{
+            top:-15px !important;
+          }
+          .tripDetailsHeaderCity{
+            font-size:14px !important;
+          }
+
+          .filterContainer{
+            flex-direction:column;
           }
         }
     `}

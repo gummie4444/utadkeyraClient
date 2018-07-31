@@ -45,6 +45,21 @@ export default ({ type, header, value }) => (
           justify-content:center;
           align-items:center;
         }
+        @media only screen and (max-width: 600px) {
+
+        .tripDetailsMainItemSmall, .tripDetailsMainItemBig{
+          margin-top:5px;
+          margin-bottom:5px;
+          flex:1;
+        }
+        .tripDetailsMainItemBig{
+          margin-top:0;
+          margin-bottom:0;
+        }
+        .tripDetailsMainItemValue{
+          font-size:16px;
+        }
+      }
       `
     }
     </style>

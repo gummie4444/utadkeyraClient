@@ -17,6 +17,16 @@ export default ({ fromCity, toCity, type}) => (
         margin-bottom: 30px;
         margin-top: 20px;
     }
+
+    @media only screen and (max-width: 600px) {
+      .tripDetailsHeader{
+        width:100vw ;
+        margin-bottom: 10px ;
+        margin-top: 10px ;
+        height: 50px ;
+      }
+    }
+    
 `
     }
     </style>

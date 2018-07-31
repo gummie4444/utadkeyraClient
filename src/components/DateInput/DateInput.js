@@ -82,6 +82,17 @@ export default class DateInput extends React.Component {
                 width: 24px;
                 height: 24px;   
               }
+
+              @media only screen and (max-width: 600px) {
+                .inputContainer{
+                  width: 100%;
+                  display: flex;
+                  }
+                .inputContainer input{
+                  flex:1;
+                  margin-left:0 !important;
+                }
+              }
               `}
         </style>
       </div>

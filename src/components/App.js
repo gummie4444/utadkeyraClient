@@ -160,9 +160,7 @@ textarea {
             overflow: scroll;
             -webkit-overflow-scrolling: touch;
           }
-          div > * {
-            -webkit-transform: translateZ(0px);
-        }
+          
 
           .createTripModalInput .closeIcon {
             position: absolute;

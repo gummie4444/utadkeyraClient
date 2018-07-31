@@ -30,6 +30,7 @@ export default ({ click }) => (
       }
       @media only screen and (max-width: 600px) {
         .createNewTripButton{
+          z-index:10;
 
         
         right:15px;

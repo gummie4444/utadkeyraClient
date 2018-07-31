@@ -8,7 +8,7 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <title>My page title</title>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <meta name="viewport" content="initial-scale=1.0, width=device-width,maximum-scale=1, user-scalable=0"/>
           <link rel="stylesheet" href="/_next/static/style.css" />
 
 

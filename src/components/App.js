@@ -152,6 +152,17 @@ textarea {
             padding:0;
             -webkit-overflow-scrolling : touch !important;
           }
+          html{
+            overflow: scroll;
+             -webkit-overflow-scrolling: touch;
+          }
+          div {
+            overflow: scroll;
+            -webkit-overflow-scrolling: touch;
+          }
+          div > * {
+            -webkit-transform: translateZ(0px);
+        }
 
           .createTripModalInput .closeIcon {
             position: absolute;

@@ -176,16 +176,12 @@ textarea {
             padding-right: 0;
             padding-left: 0;
             border-radius:0;
+            padding-top:0;
           }
           .tripDetailsTimeWrapper{
             width:100vw !important;
           }
-          .tripDetailsHeader{
-            width:100vw !important;
-            margin-bottom: 10px !important;
-            margin-top: 10px !important;
-            height: 50px !important;
-          }
+
           .tripDetailsHeaderCityIcon{
             top:-15px !important;
           }

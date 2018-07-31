@@ -22,6 +22,10 @@ export default ({ phone, seats, email }) => (
   .tripDetailsMainSmall{
     display:none;
   }
+  .tripDetailsMainBig{
+    display: flex;
+    flex: 1;
+  }
 
   @media only screen and (max-width: 600px) {
     .tripDetailsMainSmall{

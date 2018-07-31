@@ -452,6 +452,7 @@ export default class CreateTripModal extends React.Component {
           >
             {(createTrip, { loading, error }) => (
             <React.Fragment>
+                <div className="createTripModalWrap" style={{overflowY:'auto', paddingTop:'10px',paddingBottom:'0px', minHeight:'100%', display:'flex', flexDirection:'column'}}>
                 <div className="createTripModalHeader">
                     <span>new trip</span>
                 </div>
@@ -575,7 +576,7 @@ export default class CreateTripModal extends React.Component {
                     } 
                 </div>
                 {this.state.loading && <div className="createTripModalLoadingOverlay"></div>}
-                
+                </div>
             </React.Fragment>
 
           )}
@@ -767,6 +768,9 @@ export default class CreateTripModal extends React.Component {
                 border-bottom-left-radius: 4px;
                 border-bottom-right-radius: 4px;
                 position:relative;
+                margin-top: auto;
+                margin-bottom: 10px;
+                
             }
             .createTripModalNewButton{
                 background: #50E3C2;
@@ -790,7 +794,6 @@ export default class CreateTripModal extends React.Component {
             }
             @media only screen and (max-width: 600px) {
                 .createTripModalMain{
-                    flex:1;
                     margin-left: 10px;
                     margin-right: 10px;
                     margin-bottom: 10px;
@@ -823,12 +826,23 @@ export default class CreateTripModal extends React.Component {
                     height:100vh;
 
                 }
+
+
             }
             @media only screen and (min-height: 700px) and (max-width: 600px) {
                 .long{
                     height:100px !important;
                 }
+                .createTripModalWrap{
+                    display:flex;
+                }
+            }
 
+            @media only screen and (max-height: 600px) and (max-width: 600px) {
+            
+                .createTripModalWrap{
+                    display:block !important;
+                }
             }
           `}
         </style>

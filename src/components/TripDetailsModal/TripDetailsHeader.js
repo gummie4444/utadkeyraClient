@@ -22,7 +22,7 @@ export default ({ fromCity, toCity, type}) => (
       .tripDetailsHeader{
         width:100vw ;
         margin-bottom: 10px ;
-        margin-top: 10px ;
+        margin-top: 40px ;
         height: 50px ;
       }
     }

@@ -194,6 +194,15 @@ export default ({ trip, index, openPortal }) => (
           font-size:12px;
         }
       } 
+      @media only screen and (max-width: 400px) {
+        .tripType{
+          padding:5px;
+        }
+        .tripTime{
+          padding:10px;
+      }
+      }
+
     `}
     </style>
   </div>

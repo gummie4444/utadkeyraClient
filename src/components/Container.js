@@ -373,6 +373,21 @@ export default class AutoSuggestInput extends React.Component {
                     justify-content:center; 
                 }
               } 
+              @media only screen and (max-width: 400px) {
+                .tripHeaderItemType{
+                    margin-right: 5px;
+                    margin-left: 5px;
+                }
+                .tripTime{
+                    padding:10px;
+                }
+                .tripHeaderItemDate{
+                    flex:4;
+                    margin-right:10px;
+                    margin-left:10px;
+                    justify-content:center; 
+                }
+              }
         `}
         </style>
 

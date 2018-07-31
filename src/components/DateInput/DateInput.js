@@ -46,6 +46,7 @@ export default class DateInput extends React.Component {
           dayPickerProps={{
               locale: 'is',
               localeUtils: MomentLocaleUtils,
+              disabledDays: { before: new Date()},
             }}
           placeholder="All dates"
           formatDate={formatDate}

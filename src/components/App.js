@@ -150,6 +150,7 @@ textarea {
         @media only screen and (max-width: 600px) {
           body{
             padding:0;
+            -webkit-overflow-scrolling : touch !important;
           }
 
           .createTripModalInput .closeIcon {

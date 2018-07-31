@@ -11,6 +11,7 @@ export default ({ date, onDateChange }) => (
     dayPickerProps={{
         locale: 'is',
         localeUtils: MomentLocaleUtils,
+        disabledDays: { before: new Date() },
       }}
     placeholder=""
     formatDate={formatDate}

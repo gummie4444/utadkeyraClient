@@ -535,24 +535,24 @@ export default class CreateTripModal extends React.Component {
                         <CreateTripSuggestInput placeholder="" onChange={this.onToChange} onSelect={this.onToSelected} onClear={this.onToClear} suggestions={this.props.cities} value={this.state.toValue} />
                     </CreateTripInput>
                     <CreateTripInput error={this.state.nameError} errorMsg={this.state.nameErrorMsg} inputText="Name">
-                        <input className="createTripModalInputInput" onChange={this.onNameChange} value={this.state.name} />
+                        <input maxLength="30" className="createTripModalInputInput" onChange={this.onNameChange} value={this.state.name} />
                     </CreateTripInput>
                     <CreateTripInput  error={this.state.emailError} errorMsg={this.state.emailErrorMsg}  inputText="Email">
-                            <input  type="email" className="createTripModalInputInput" onChange={this.onEmailChange} value={this.state.email} />
+                            <input maxLength="35" type="email" className="createTripModalInputInput" onChange={this.onEmailChange} value={this.state.email} />
                     </CreateTripInput>
                     <div style={{flex:1, flexDirection:'row', display:'flex'}}>
-                            <CreateTripInput  error={this.state.dateError} errorMsg={this.state.dateErrorMsg}  marginRight={6} inputText="Date">
+                            <CreateTripInput error={this.state.dateError} errorMsg={this.state.dateErrorMsg}  marginRight={6} inputText="Date">
                                 <CreateTripDateInput date={this.state.date} onDateChange={this.onDateChange}  />
                             </CreateTripInput>
                             <CreateTripInput helpText={'hh:mm or ANY'} error={this.state.timeError} errorMsg={this.state.timeErrorMsg} marginRight={6} inputText="Time">
-                                <input value={this.state.time} onChange={this.onTimeChange} style={{ paddingBottom:'3px', width: '100%',boxSizing:'border-box'}} className="createTripModalInputInput" type="string"/>
+                                <input maxLength="6" value={this.state.time} onChange={this.onTimeChange} style={{ paddingBottom:'3px', width: '100%',boxSizing:'border-box'}} className="createTripModalInputInput" type="string"/>
                             </CreateTripInput>
                         </div>
                     
                         <div clasName="createTripModalMainInputWrapperSmall" style={{flex:1, flexDirection:'row', display:'flex'}}>
 
                             <CreateTripInput  error={this.state.phoneError} errorMsg={this.state.phoneErrorMsg}  inputText="Mobile">
-                                <input className="createTripModalInputInput mobileSpecial" onChange={this.onPhoneChange} value={this.state.phone} />
+                                <input maxLength="20" className="createTripModalInputInput mobileSpecial" onChange={this.onPhoneChange} value={this.state.phone} />
                             </CreateTripInput>
 
                             <CreateTripInput  error={this.state.seatsError} errorMsg={this.state.seatsErrorMsg}  inputText={this.state.type === 2 ? 'Seats available' : 'Seats needed'}>
@@ -560,7 +560,7 @@ export default class CreateTripModal extends React.Component {
                             </CreateTripInput>
                         </div>
                     <CreateTripInput inputText="Notes">
-                        <textarea  onChange={this.onNotesChange} value={this.state.notes} className="createTripModalInputInput long" />
+                        <textarea maxLength="255" onChange={this.onNotesChange} value={this.state.notes} className="createTripModalInputInput long" />
                     </CreateTripInput>
                 </div>
 
@@ -830,12 +830,23 @@ export default class CreateTripModal extends React.Component {
 
             }
             @media only screen and (min-height: 700px) and (max-width: 600px) {
+                .modalOverlay{
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    transform:none;
+
+                }
                 .long{
                     height:100px !important;
                 }
                 .createTripModalWrap{
                     display:flex;
+                    -webkit-overflow-scrolling: touch;
                 }
+  
             }
 
             @media only screen and (max-height: 600px) and (max-width: 600px) {

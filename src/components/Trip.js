@@ -71,7 +71,7 @@ export default ({ trip, index, openPortal }) => (
       <div className="tripTimeWrapper">
         <span className="tripTimeDay"> {moment(trip.time).format('ddd')} </span>
         <span className="tripTimeDayMain"> {moment(trip.time).format('D')} </span>
-        <span className="tripTimeMonth"> {moment(trip.time).format('HH:mm') === '23:59' ? `Any time${moment(trip.time).format(' MMMM')}` : moment(trip.time).format('HH:mm MMMM')} </span>
+        <span className="tripTimeMonth"> {moment(trip.time).format('HH:mm') === '23:59' ? `Any time${moment(trip.time).format(' MMM')}` : moment(trip.time).format('HH:mm MMM')} </span>
       </div>
     </div>
 

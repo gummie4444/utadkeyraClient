@@ -12,7 +12,7 @@ import { formatDate, colors } from '../../helpers';
 import CloseIcon from '../Icons/CloseIcon';
 
 
-export default class DateInput extends React.Component {
+export default class DateInput extends React.PureComponent {
   constructor() {
     super();
     // Autosuggest is a controlled component.
@@ -25,7 +25,6 @@ export default class DateInput extends React.Component {
     };
   }
     onFocus = () => {
-      console.log("onFocus");
       this.setState({
         zindex: true
       });
@@ -36,6 +35,7 @@ export default class DateInput extends React.Component {
       });
     };
     render() {
+
       const {date, onDateChange} = this.props;
       return (
         <div className="inputContainer" id="mainDateInput" style={{zIndex: this.state.zindex ? 300 : 2}}>
@@ -84,7 +84,7 @@ export default class DateInput extends React.Component {
                 height: 24px;   
               }
 
-              @media only screen and (max-width: 600px) {
+              @media only screen and (max-width: 768px) {
                 .inputContainer{
                   width: 100%;
                   display: flex;

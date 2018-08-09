@@ -27,7 +27,7 @@ export default ({ phone, seats, email }) => (
     flex: 1;
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 768px) {
     .tripDetailsMainSmall{
       display:flex;
       flex-direction:column;

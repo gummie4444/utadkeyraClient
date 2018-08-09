@@ -37,7 +37,7 @@ const ADD_TODO = gql`
     }
   }
 `;
-export default class CreateTripModal extends React.Component {
+export default class CreateTripModal extends React.PureComponent {
   constructor() {
     super();
 
@@ -45,7 +45,7 @@ export default class CreateTripModal extends React.Component {
       error:false,
       errorText: [],
 
-      date: null,
+      date: '',
 
       from: '',
       fromValue:'',
@@ -381,14 +381,12 @@ export default class CreateTripModal extends React.Component {
 
             cb(payload).then((tag,error) => {
                 //Close the modal
-                console.log(error,"error", tag);
                 // call some function that reloads the whole thingy
                 // Call some function that adds this to the function
                 this.props.outsideClick();
                 this.setState({loading:false})
 
             }).catch(e => {
-                console.log(e, "error22--");
 
                 this.setState({
                     error: true,
@@ -399,6 +397,7 @@ export default class CreateTripModal extends React.Component {
         }
       }
   render() {
+
     const { outsideClick, trip, from, to, fromId, toId, date, skip, amount } = this.props;
     return (
       <div onClick={outsideClick} className="modalOverlay">
@@ -549,7 +548,7 @@ export default class CreateTripModal extends React.Component {
                             </CreateTripInput>
                         </div>
                     
-                        <div clasName="createTripModalMainInputWrapperSmall" style={{flex:1, flexDirection:'row', display:'flex'}}>
+                        <div className="createTripModalMainInputWrapperSmall" style={{flex:1, flexDirection:'row', display:'flex'}}>
 
                             <CreateTripInput  error={this.state.phoneError} errorMsg={this.state.phoneErrorMsg}  inputText="Mobile">
                                 <input maxLength="20" className="createTripModalInputInput mobileSpecial" onChange={this.onPhoneChange} value={this.state.phone} />
@@ -769,7 +768,6 @@ export default class CreateTripModal extends React.Component {
                 border-bottom-right-radius: 4px;
                 position:relative;
                 margin-top: auto;
-                margin-bottom: 10px;
                 
             }
             .createTripModalNewButton{
@@ -792,7 +790,8 @@ export default class CreateTripModal extends React.Component {
             .createTripModalNewButton:active{
               background:#3aaf94;
             }
-            @media only screen and (max-width: 600px) {
+            @media only screen and (max-width: 768px) {
+                
                 .createTripModalMain{
                     margin-left: 10px;
                     margin-right: 10px;
@@ -823,13 +822,12 @@ export default class CreateTripModal extends React.Component {
                     display:none;
                 }
                 .modal{
-                    height:100vh;
 
                 }
 
 
             }
-            @media only screen and (min-height: 700px) and (max-width: 600px) {
+            @media only screen and (min-height: 700px) and (max-width: 768px) {
                 .modalOverlay{
                     position: fixed;
                     top: 0;
@@ -849,7 +847,7 @@ export default class CreateTripModal extends React.Component {
   
             }
 
-            @media only screen and (max-height: 600px) and (max-width: 600px) {
+            @media only screen and (max-height: 600px) and (max-width: 768px) {
             
                 .createTripModalWrap{
                     display:block !important;

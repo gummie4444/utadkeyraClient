@@ -3,7 +3,6 @@ import moment from 'moment';
 import { formatDate } from '../helpers';
 
 const getText = (from, to, date) => {
-  console.log(from, 'from');
   if (from && to && date) {
     return (<span>There are no rides from <b>{from.name}</b> to <b>{to.name}</b> on <b>{formatDate(date)}</b></span>);
   } else if (from) {

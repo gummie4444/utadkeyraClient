@@ -44,16 +44,16 @@ export const tripsSkipQueryVars = {
   amount: 20,
 };
 
-export default class TripsList extends React.Component {
+export default class TripsList extends React.PureComponent {
   constructor() {
     super();
   }
   addNewItem = (item) => {
-    console.log('Addin new item', item);
     // Maby manully add it here
  };
 
   render() {
+
     const {
       from, to, fromId, toId, date, skip, amount, openPortal,
     } = this.props;

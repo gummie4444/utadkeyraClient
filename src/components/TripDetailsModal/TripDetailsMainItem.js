@@ -45,7 +45,7 @@ export default ({ type, header, value }) => (
           justify-content:center;
           align-items:center;
         }
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 768px) {
 
         .tripDetailsMainItemSmall, .tripDetailsMainItemBig{
           margin-top:5px;

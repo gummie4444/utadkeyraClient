@@ -95,13 +95,13 @@ const renderSuggestion = suggestion => (
 
 
 const renderInputComponent = inputProps => (
-    <div className="inputContainer" style={{zIndex: inputProps.zindex ? 300 : 2}}>
+    <div className="inputContainer" style={{zIndex: inputProps.test.zindex ? 300 : 2}}>
       <div className="icon" >
         <Location color={inputProps.iconcolor} height="24" />
       </div>
       <input onFocus={inputProps.onFocus} {...inputProps} />
 
-      {inputProps.value && <CloseIcon click={(e) => inputProps.onClear()}/> }
+      {inputProps.value && <CloseIcon click={(e) => inputProps.test.onClear()}/> }
         <style jsx>{`
             .inputContainer {
                 position: relative;
@@ -121,7 +121,7 @@ const renderInputComponent = inputProps => (
               height:24px;
             }
 
-            @media only screen and (max-width: 600px) {
+            @media only screen and (max-width: 768px) {
               .inputContainer{
                 width: 100%;
                 display: flex;
@@ -131,13 +131,16 @@ const renderInputComponent = inputProps => (
                 flex:1;
                 margin-left:0 !important;
               }
+              .inputContainer input:focus{
+                box-shadow:none !important;
+              }
             }
             `}
         </style>
     </div>
   );
 
-export default class AutoSuggestInput extends React.Component {
+export default class AutoSuggestInput extends React.PureComponent {
   constructor() {
     super();
     // Autosuggest is a controlled component.
@@ -188,12 +191,11 @@ export default class AutoSuggestInput extends React.Component {
       placeholder: this.props.placeholder,
       value: this.props.value,
       onChange: this.props.onChange,
-      onClear:this.props.onClear,
+      test: { onClear: this.props.onClear, zindex:this.state.zindex},
       icon: this.props.icon,
       iconcolor: this.props.iconcolor,
       onFocus: this.onFocus,
       onBlur: this.onBlur,
-      zindex:this.state.zindex
     };
 
     // Finally, render it!

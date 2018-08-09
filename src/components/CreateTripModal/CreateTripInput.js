@@ -63,7 +63,7 @@ export default ({
           right:16px;
           bottom:-4px;
         }
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 768px) {
 
           .createTripModalInputTitle{
             font-size: 16px;

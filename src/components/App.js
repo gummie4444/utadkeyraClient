@@ -98,10 +98,12 @@ textarea {
         .modalClose {
             color: #aaa;
             position:absolute;
-            right:10px;
-            top:10px;
+            right:0;
+            top:0px;
             font-size: 28px;
             font-weight: bold;
+            z-index:30;
+            padding:10px;
         }
         
         .modalClose:hover,
@@ -147,7 +149,7 @@ textarea {
         .closeIcon:after {
           transform: rotate(-45deg);
         }
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 768px) {
           body{
             padding:0;
             -webkit-overflow-scrolling : touch !important;

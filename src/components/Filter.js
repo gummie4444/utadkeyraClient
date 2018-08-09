@@ -12,9 +12,19 @@ export default class Filter extends React.Component {
       types: [{ id: 1, name: 'Ride' }, { id: 2, name: 'Passenger' }],
     };
   }
-
+  shouldComponentUpdate(nextProps) {
+    if(this.props.cities.length !== nextProps.cities.length ||
+      this.props.fromValue !== nextProps.fromValue ||
+      this.props.toValue !== nextProps.toValue ||
+      this.props.currentUsableDate !== nextProps.currentUsableDate
+    ) {
+      return true;
+    }
+    return false;
+  }
 
   render() {
+
     return (
       <div className="filterContainer"> 
         <AutoSuggestionInput icon="location" onClear={this.props.onFromClear} iconcolor={colors.orange} placeholder="From" onChange={this.props.onFromChange} onSelect={this.props.onFromSelected} suggestions={this.props.cities} value={this.props.fromValue} />
@@ -31,7 +41,7 @@ export default class Filter extends React.Component {
                 .filterContainer > div:first-of-type input {
                     margin-left:0 !important;
                 }
-                @media only screen and (max-width: 600px) {
+                @media only screen and (max-width: 768px) {
 
                   .filterContainer{
                     flex-direction:column;

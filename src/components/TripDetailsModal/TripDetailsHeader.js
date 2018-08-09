@@ -26,7 +26,22 @@ export default ({ fromCity, toCity, type}) => (
         height: 50px ;
       }
     }
-    
+    @media only screen and (max-width: 764px) {
+      .tripDetailsHeader{
+        width:100vw ;
+        margin-bottom: 10px ;
+        margin-top: 40px ;
+        height: 50px ;
+      }
+    }
+    @media only screen  and (min-device-width : 768px) 
+    and (max-device-width : 1024px) {
+      .tripDetailsHeader{
+        margin-top: 30px;
+        min-height: 50px;
+        margin-bottom: 10px;
+      }
+    }
 `
     }
     </style>

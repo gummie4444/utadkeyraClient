@@ -104,14 +104,14 @@ const renderSuggestion = suggestion => (
 
 
 const renderInputComponent = inputProps => (
-    <div className="inputContainer" style={{zIndex: inputProps.zindex ? 300 : 2}}>
+    <div className="inputContainer" style={{zIndex: inputProps.test.zindex ? 300 : 2}}>
       <input autoFocus={inputProps.autoFocus} onFocus={inputProps.onFocus} {...inputProps} />
-      {inputProps.value && <CloseIcon click={(e) => inputProps.onClear()} /> }
+      {inputProps.value && <CloseIcon click={(e) => inputProps.test.onClear()} /> }
         <style jsx>{`
             .inputContainer{
                 display:flex;
             }
-            @media only screen and (max-width: 600px) {
+            @media only screen and (max-width: 768px) {
     
              input{    
                   padding-top:4px !important;
@@ -126,7 +126,7 @@ const renderInputComponent = inputProps => (
   );
 //                  max-width: calc(100vw/2 - 28px);
 
-export default class CreateTripSuggestInput extends React.Component {
+export default class CreateTripSuggestInput extends React.PureComponent {
   constructor() {
     super();
     // Autosuggest is a controlled component.
@@ -140,7 +140,6 @@ export default class CreateTripSuggestInput extends React.Component {
       zindex: false
     };
   }
-
 
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
@@ -167,25 +166,22 @@ export default class CreateTripSuggestInput extends React.Component {
     });
   };
   onSuggestionSelected = (e, {suggestion}) => {
-    console.log(suggestion,"currrentlySelected");
     this.props.onSelect(suggestion);
   };
 
   render() {
     const { suggestions } = this.state;
 
-    console.log(this.state,"state")
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
       placeholder: this.props.placeholder,
       value: this.props.value,
       onChange: this.props.onChange,
-      onClear:this.props.onClear,
+      test: {onClear:this.props.onClear,zindex:this.state.zindex, },
       icon: this.props.icon,
       iconcolor: this.props.iconcolor,
       onFocus: this.onFocus,
       onBlur: this.onBlur,
-      zindex:this.state.zindex,
       autoFocus:this.props.focus
     };
 

@@ -29,6 +29,21 @@ export default ({ notes, name }) => (
         margin-bottom:20px;
         position:relative;
         font-family: Arial, Helvetica, sans-serif;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+      
+        -ms-word-break: break-all;
+        /* This is the dangerous one in WebKit, as it breaks things wherever */
+        word-break: break-all;
+        /* Instead use this non-standard one: */
+        word-break: break-word;
+      
+        /* Adds a hyphen where the word breaks, if supported (No Blink) */
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+        max-width:80%;
       }
 
       .tripDetailsNoteText:before{
@@ -56,7 +71,7 @@ export default ({ notes, name }) => (
         font-weight:700;
       }
 
-      @media only screen and (max-width: 600px) {
+      @media only screen and (max-width: 768px) {
         .tripDetailsNoteName{
           margin-top:10px;
         }

@@ -6,7 +6,7 @@ import CarSeatIcon from '../Icons/CarSeatIcon';
 
 */
 
-export default class CarSeatInput extends React.Component {
+export default class CarSeatInput extends React.PureComponent {
   constructor() {
     super();
     this.state = {
@@ -36,6 +36,7 @@ export default class CarSeatInput extends React.Component {
 }
 
   render() {
+
     return (
       <div className="carSeatInputWrapper">
         <div className="carSeatInputWrapperIcon">
@@ -106,7 +107,7 @@ export default class CarSeatInput extends React.Component {
           .carSeatInputIconSpecial{
             color:white;
           }
-          @media only screen and (max-width: 600px) {
+          @media only screen and (max-width: 768px) {
             .carSeatInputWrapper{
               margin:2px;
               padding-top:2px;

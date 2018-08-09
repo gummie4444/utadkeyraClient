@@ -37,7 +37,7 @@
     color:black;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
     .createTripModalInput #react-autowhatever-{
         top:30px !important;
         left:2px !important;

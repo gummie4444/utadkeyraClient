@@ -7,7 +7,8 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <title>My page title</title>
+          <link rel="icon" type="image/png" href="static/images/favicon-32x32.png" sizes="32x32" />
+          <title>Út að keyra</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width,maximum-scale=1, user-scalable=0"/>
           <link rel="stylesheet" href="/_next/static/style.css" />
 

@@ -11,6 +11,8 @@ import TripDetailsModal from './TripDetailsModal';
 import CreateTripModal from './CreateTripModal/CreateTripModal';
 import CreateNewTripButton from './CreateNewTripButton';
 
+import ReactGA from 'react-ga';
+
 //import Headroom from 'react-headroom';
 export default class AutoSuggestInput extends React.Component {
   constructor() {
@@ -48,7 +50,28 @@ export default class AutoSuggestInput extends React.Component {
       currentTrip: null
     };
   }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.cities.length !== nextState.cities.length) {
+      return true;
+    }
+    if (this.state.fromValue !== nextState.fromValue ||
+        this.state.from !== nextState.from ||
+        this.state.dimensions.height !== nextState.dimensions.height ||
+        this.state.dimensions.width  !== nextState.dimensions.width ||
+        this.state.width !== nextState.width ||
+        this.state.currentDate !== nextState.currentDate ||
+        this.state.currentUsableDate !== nextState.currentUsableDate ||
+        this.state.currentType !== nextState.currentType || 
+        this.state.modalType !== nextState.modalType ||
+        this.state.isOpen !== nextState.isOpen ||
+        this.state.currentTrip !== nextState.currentTrip) {
+      return true;
+    }
+    return false;
+  }
   componentDidMount() {
+    ReactGA.initialize('UA-123666322-1');
+    ReactGA.pageview(window.location.pathname + window.location.search);
     fetch(process.env.NODE_ENV !== 'production' ? config.apiEndpoint : config.apiEndpointProd, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -141,6 +164,7 @@ export default class AutoSuggestInput extends React.Component {
     };
 
   render() {
+      
     const currentModal = () => {
         if(this.state.isOpen) {
             switch(this.state.modalType) {
@@ -169,7 +193,6 @@ export default class AutoSuggestInput extends React.Component {
     }
 
     const preLines = () => {
-        console.log(this.state.dimensions.width,"width")
         const count = this.state.dimensions.width < 130 ? 2 : Math.floor((this.state.dimensions.width !== -1 ? this.state.dimensions.width : 100) / 100);
         const array = [...Array(count).keys()];
 
@@ -328,7 +351,7 @@ export default class AutoSuggestInput extends React.Component {
                 flex:2;
               }
 
-              @media only screen and (max-width: 600px) {
+              @media only screen and (max-width: 768px) {
                   .tripHeader{
                       height:40px;
                   }
@@ -386,6 +409,24 @@ export default class AutoSuggestInput extends React.Component {
                     margin-right:10px;
                     margin-left:10px;
                     justify-content:center; 
+                }
+              }
+              @media only screen  and (min-device-width : 768px) 
+              and (max-device-width : 1024px) {
+                .headerStyle{
+                    font-size: 92px;
+                    margin: 40px;
+
+                    color: white;
+                    width: 100vw;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+
+                    margin-top:-25px;
+                }
+                .headerStyleMini{
+                    display:flex;
+                    font-size:18px;
                 }
               }
         `}

@@ -7,7 +7,6 @@ const routes = require('./routes');
 const port = parseInt(process.env.PORT, 10) || 3100;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
-
 const handler = routes.getRequestHandler(app);
 app.prepare().then(() => {
   const server = express();

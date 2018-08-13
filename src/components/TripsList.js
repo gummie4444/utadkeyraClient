@@ -73,7 +73,6 @@ export default class TripsList extends React.PureComponent {
         {({
       loading, error, data: { tripsSkip }, fetchMore,
   }) => {
-    console.log(loading, 'loading');
         if (error) return <ErrorMessage message="Error loading rides." />;
         if (tripsSkip && tripsSkip.trips && tripsSkip.trips.length) {
           const areMorePosts = tripsSkip.trips.length < tripsSkip.count;

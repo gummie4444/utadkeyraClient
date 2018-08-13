@@ -9,7 +9,7 @@ export default ({ date, onDateChange }) => (
   
   <DayPickerInput
     dayPickerProps={{
-        locale: 'is',
+        locale: 'en',
         localeUtils: MomentLocaleUtils,
         disabledDays: { before: new Date() },
       }}

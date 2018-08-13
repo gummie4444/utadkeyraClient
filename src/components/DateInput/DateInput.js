@@ -44,7 +44,7 @@ export default class DateInput extends React.PureComponent {
         </div>
         <DayPickerInput
           dayPickerProps={{
-              locale: 'is',
+              locale: 'en',
               localeUtils: MomentLocaleUtils,
               disabledDays: { before: new Date()},
             }}

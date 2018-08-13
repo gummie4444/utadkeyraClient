@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "build:prod": "next build && next start",
+    "build:prod": "NODE_ENV=production next build && node server/index.js",
+    "build:prodNext": "next build && next start",
     "start": "next start",
     "startDev": "NODE_ENV=development nodemon -w server server/index.js"
   },

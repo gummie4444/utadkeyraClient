@@ -467,7 +467,7 @@ export default class CreateTripModal extends React.PureComponent {
                         <div className="createTripModalMainInputType" style={{ flex: 1 }}>
                             <div className={this.state.type === 2 ? 'createTripModalMainInputTypeWrap enabled' : 'createTripModalMainInputTypeWrap disabled'} onClick={() => this.onClickType(2)} onMouseLeave={() => this.onHoverType('out',2)} onMouseOver={() => this.onHoverType('in',2)}>
                                 <div className="createTripModalMainInputIcon"><CarDriving color={this.state.type === 2 ? 'white': 'gray'} height={50} width={70} /></div>
-                                <span className="createTripModalMainInputText">Ride</span>
+                                <span className="createTripModalMainInputText">Driver</span>
                             </div>
                         </div>
                         
@@ -522,7 +522,7 @@ export default class CreateTripModal extends React.PureComponent {
                         <div className="createTripModalMainInputType" style={{ flex: 1 }}>
                             <div className={this.state.type === 2 ? 'createTripModalMainInputTypeWrap enabled' : 'createTripModalMainInputTypeWrap disabled'} onClick={() => this.onClickType(2)} onMouseLeave={() => this.onHoverType('out',2)} onMouseOver={() => this.onHoverType('in',2)}>
                                 <div className="createTripModalMainInputIcon"><CarDriving  height ={20} width={35} color={this.state.type === 2 ? 'white': 'gray'}/></div>
-                                <span className="createTripModalMainInputText">Ride</span>
+                                <span className="createTripModalMainInputText">Driver</span>
                             </div>
                         </div>
                         

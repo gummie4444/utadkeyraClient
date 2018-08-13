@@ -136,7 +136,7 @@ export default ({ trip, index, openPortal }) => (
         font-size:46px;
       }
       .tripTimeMonth{
-          font-size:12px;
+          font-size:14px;
           margin-top:-8px;
           font-variant-caps: all-small-caps;
       }

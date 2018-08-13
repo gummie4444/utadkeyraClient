@@ -56,6 +56,8 @@ export default class AutoSuggestInput extends React.Component {
     }
     if (this.state.fromValue !== nextState.fromValue ||
         this.state.from !== nextState.from ||
+        this.state.toValue !== nextState.to ||
+        this.state.to !== nextState.to ||
         this.state.dimensions.height !== nextState.dimensions.height ||
         this.state.dimensions.width  !== nextState.dimensions.width ||
         this.state.width !== nextState.width ||

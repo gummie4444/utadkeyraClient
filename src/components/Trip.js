@@ -200,6 +200,7 @@ export default ({ trip, index, openPortal }) => (
         }
         .tripTime{
           padding:10px;
+          flex:5;
       }
       }
 

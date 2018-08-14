@@ -19,6 +19,7 @@ export default ({ click }) => (
           align-items:center;
           font-size:48px;
           cursor:pointer;
+          padding-bottom: env(safe-area-inset-bottom);
       }
 
       .createNewTripButton:hover{

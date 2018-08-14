@@ -17,6 +17,11 @@ input[type='number'],
 textarea {
   font-size: 16px;
 }
+input {
+  border-radius: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius:0px;
+}
       body {
         margin: 0;
         padding: 25px 50px;

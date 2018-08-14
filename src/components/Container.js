@@ -407,7 +407,7 @@ export default class AutoSuggestInput extends React.Component {
                     padding:10px;
                 }
                 .tripHeaderItemDate{
-                    flex:4;
+                    flex:5;
                     margin-right:10px;
                     margin-left:10px;
                     justify-content:center; 

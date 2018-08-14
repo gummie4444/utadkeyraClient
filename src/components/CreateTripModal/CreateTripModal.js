@@ -269,14 +269,14 @@ export default class CreateTripModal extends React.PureComponent {
         if(this.state.seats == 0) {
             error= true;
             seatsError= true;
-            seatsErrorMsg= 'Select seat count';
+            seatsErrorMsg= 'Select seats';
 
             errorText.push('Add how many seats are needed for your trip');
         }
         if(this.state.seats == 0) {
             error= true;
             seatsError= true;
-            seatsErrorMsg= 'Select seat count';
+            seatsErrorMsg= 'Select seats';
 
             errorText.push('Add how many seats are needed for your trip');
         }

@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-export default ({ color, height }) => (
+export default ({ color='firebrick', height }) => (
   <svg width={`${height || 14 }px`} height={`${height || 14 }px`} viewBox="0 0 13 14" version="1.1" xmlns="http://www.w3.org/2000/svg">
     <title>Shape</title>
     <desc>Created with Sketch.</desc>

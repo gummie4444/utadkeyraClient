@@ -9,10 +9,16 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="icon" type="image/png" href="static/images/favicon-32x32.png" sizes="32x32" />
           <title>Út að keyra</title>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width,maximum-scale=1, user-scalable=0"/>
+          <meta property="og:title" content="Út að keyra" />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="http://www.utadkeyra.is/" />
+          <meta name="viewport" content="initial-scale=1.0, width=device-width,maximum-scale=1" />
+          <meta name="og:description " content="Út að keyra makes carpooling easier in Iceland, post a ride or search for drivers to get around Iceland" />
+          <meta name="description" content="Út að keyra makes carpooling easier in Iceland, post a ride or search for drivers to get around Iceland" />
+          <meta name="keywords" content="carpool,travel,driving,ride,passenger,car,rideshare" />
+          <meta name="author" content="Guðmundur Egill" />
+
           <link rel="stylesheet" href="/_next/static/style.css" />
-
-
         </Head>
         <body>
           <Main />

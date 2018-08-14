@@ -8,6 +8,9 @@ import { colors } from '../helpers';
 
 
 const getSeats = (trip, height = 35, width = 40) => {
+  if(!trip.tripDetails) {
+    console.log('test');
+  }
   if (trip.tripDetails.seats) {
     if (trip.tripDetails.seats > 4) {
       return (<React.Fragment>

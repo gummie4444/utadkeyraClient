@@ -12,6 +12,7 @@ import CreateTripModal from './CreateTripModal/CreateTripModal';
 import CreateNewTripButton from './CreateNewTripButton';
 
 import ReactGA from 'react-ga';
+console.log("%cMade by Guðmundur Egill https://github.com/gummie4444", "color: brown;font-weight:bold; font-size:22px;");
 
 //import Headroom from 'react-headroom';
 export default class AutoSuggestInput extends React.Component {
@@ -254,9 +255,11 @@ export default class AutoSuggestInput extends React.Component {
                 Date
               </div>
         </div>
-        <TripsList ref={instance => { this.tripListRef = instance; }} openPortal={this.openTripDetails} to={this.state.to} from={this.state.from} fromId={this.state.fromId} toId={this.state.toId} date={this.state.currentDate} skip={this.state.skip} amount={this.state.amount} />
+        <TripsList isOpen={this.state.isOpen} ref={instance => { this.tripListRef = instance; }} openPortal={this.openTripDetails} to={this.state.to} from={this.state.from} fromId={this.state.fromId} toId={this.state.toId} date={this.state.currentDate} skip={this.state.skip} amount={this.state.amount} />
         {currentModal()}
+
         <style jsx>{`
+
             .container {
                 width: 100%;
                 display: flex;

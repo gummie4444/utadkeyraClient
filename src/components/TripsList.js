@@ -74,10 +74,10 @@ export default class TripsList extends React.PureComponent {
       loading, error, data: { tripsSkip }, fetchMore,
   }) => {
         if (error) return <ErrorMessage message="Error loading rides." />;
-        if (tripsSkip && tripsSkip.trips && tripsSkip.trips.length) {
+        if (tripsSkip && tripsSkip.trips && tripsSkip.count && tripsSkip.trips.length) {
           const areMorePosts = tripsSkip.trips.length < tripsSkip.count;
           return (
-            <div style={{ width: '100%' }}>
+            <div style={{ width: '100%',overflowY:this.props.isOpen ? 'hidden': 'scroll'}}>
               <InfiniteScroll
                 pageStart={0}
                 loadMore={() =>
@@ -94,7 +94,7 @@ export default class TripsList extends React.PureComponent {
                         if (!fetchMoreResult) {
                           return previousResult;
                         }
-
+                        console.log('fetchMoreResult.tripsSkip.trips',fetchMoreResult.tripsSkip.trips);
                         const newTripSkip = Object.assign({}, previousResult.tripsSkip, {
                           trips: [...previousResult.tripsSkip.trips, ...fetchMoreResult.tripsSkip.trips],
                         });

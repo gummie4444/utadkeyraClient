@@ -94,7 +94,6 @@ export default class TripsList extends React.PureComponent {
                         if (!fetchMoreResult) {
                           return previousResult;
                         }
-                        console.log('fetchMoreResult.tripsSkip.trips',fetchMoreResult.tripsSkip.trips);
                         const newTripSkip = Object.assign({}, previousResult.tripsSkip, {
                           trips: [...previousResult.tripsSkip.trips, ...fetchMoreResult.tripsSkip.trips],
                         });

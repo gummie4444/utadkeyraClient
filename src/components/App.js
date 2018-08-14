@@ -22,7 +22,11 @@ input {
   -webkit-appearance: none;
   -webkit-border-radius:0px;
 }
+    body, html{
+      height 100%;
+    }
       body {
+        
         margin: 0;
         padding: 25px 50px;
       }

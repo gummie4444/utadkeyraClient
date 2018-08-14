@@ -77,7 +77,7 @@ export default class TripsList extends React.PureComponent {
         if (tripsSkip && tripsSkip.trips && tripsSkip.count && tripsSkip.trips.length) {
           const areMorePosts = tripsSkip.trips.length < tripsSkip.count;
           return (
-            <div style={{ width: '100%',overflowY:this.props.isOpen ? 'hidden': 'scroll'}}>
+            <div style={{ width: '100%'}}>
               <InfiniteScroll
                 pageStart={0}
                 loadMore={() =>
@@ -107,6 +107,7 @@ export default class TripsList extends React.PureComponent {
                     })
                 }
                 hasMore={areMorePosts}
+                threshold={350}
               >
                 {tripsSkip.trips.map((trip, index) => (
                   <Trip openPortal={openPortal} key={trip.id} trip={trip} index={index} />

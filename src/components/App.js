@@ -25,7 +25,7 @@ input {
     body, html{
       height 100%;
     }
-    
+
       body {
         margin: 0;
         padding: 25px 50px;
@@ -141,6 +141,19 @@ input {
           align-items: center;
           cursor:pointer;
         }
+        .closeIconSpecial{
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          padding: 10px;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          position: absolute;
+          top: 50%;
+          
+          transform: translate(0,-50%);
+          right: -5px;
+        }
         .closeIcon:hover {
           opacity: 1;
         }
@@ -164,15 +177,6 @@ input {
             -webkit-overflow-scrolling : touch !important;
           }
 
-
-          .createTripModalInput .closeIcon {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            width: 20px;
-            height: 20px;
-
-          }
 
           .createTripModalInput .closeIcon:before, .createTripModalInput .closeIcon:after {
             position: absolute;

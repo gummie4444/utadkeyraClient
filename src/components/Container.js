@@ -138,6 +138,8 @@ export default class AutoSuggestInput extends React.Component {
     };
 
     openTripDetails = (trip) => {
+        document.body.classList.add('modal-open');
+
         this.setState({
             modalType: 'tripDetailsModal',
             isOpen: true,
@@ -146,6 +148,8 @@ export default class AutoSuggestInput extends React.Component {
     };
 
     openCreateTrip = () => {
+        document.body.classList.add('modal-open');
+
         this.setState({
             modalType: 'createTripModal',
             isOpen: true
@@ -153,6 +157,8 @@ export default class AutoSuggestInput extends React.Component {
     };
 
     outsideClick = (e) => {
+        document.body.classList.remove('modal-open');
+
         if(e) {
             e.preventDefault();
         }

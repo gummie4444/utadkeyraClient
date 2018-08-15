@@ -25,8 +25,10 @@ input {
     body, html{
       height 100%;
     }
+    body.modal-open{
+      overflow:hidden;
+    }
       body {
-        
         margin: 0;
         padding: 25px 50px;
       }

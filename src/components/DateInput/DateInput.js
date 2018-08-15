@@ -57,7 +57,8 @@ export default class DateInput extends React.PureComponent {
 
           inputProps= {{
             onFocus: this.onFocus,
-            onBlur: this.onBlur
+            onBlur: this.onBlur,
+            readOnly: true
           }
           }
         />

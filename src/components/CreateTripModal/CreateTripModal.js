@@ -474,7 +474,7 @@ export default class CreateTripModal extends React.PureComponent {
                     </div>
                     <div className="createTripModalMainInputWrapper">
                     <CreateTripInput  error={this.state.fromError} errorMsg={this.state.fromErrorMsg}   inputText="From">
-                        <CreateTripSuggestInput focus placeholder="" onChange={this.onFromChange} onSelect={this.onFromSelected} onClear={this.onFromClear} suggestions={this.props.cities} value={this.state.fromValue} />
+                        <CreateTripSuggestInput  placeholder="" onChange={this.onFromChange} onSelect={this.onFromSelected} onClear={this.onFromClear} suggestions={this.props.cities} value={this.state.fromValue} />
                     </CreateTripInput>
                     <CreateTripInput  error={this.state.toError} errorMsg={this.state.toErrorMsg}  inputText="To">
                         <CreateTripSuggestInput placeholder="" onChange={this.onToChange} onSelect={this.onToSelected} onClear={this.onToClear} suggestions={this.props.cities} value={this.state.toValue} />

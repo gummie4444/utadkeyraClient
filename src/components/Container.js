@@ -138,9 +138,10 @@ export default class AutoSuggestInput extends React.Component {
     };
 
     openTripDetails = (trip) => {
-        document.body.classList.add('modal-open');
-        document.documentElement.className += "modal-open";
 
+        document.ontouchmove = function (e) {
+            e.preventDefault();
+          }
 
         this.setState({
             modalType: 'tripDetailsModal',
@@ -150,9 +151,6 @@ export default class AutoSuggestInput extends React.Component {
     };
 
     openCreateTrip = () => {
-        document.body.classList.add('modal-open');
-        document.documentElement.className += "modal-open";
-
 
         this.setState({
             modalType: 'createTripModal',
@@ -161,15 +159,16 @@ export default class AutoSuggestInput extends React.Component {
     };
 
     outsideClick = (e) => {
-        document.body.classList.remove('modal-open');
-        document.documentElement.className = "";
-
+        console.log('outside');
 
         if(e) {
             e.preventDefault();
         }
 
         if(this.state.isOpen) {
+            document.ontouchmove = function (e) {
+                return true;
+              }
             this.setState({
                 modalType: null,
                 isOpen: false,
@@ -216,7 +215,7 @@ export default class AutoSuggestInput extends React.Component {
 
     return (
       <div className="container">
-        <span className="headerStyle"> 
+        <div className="headerStyle"> 
             <Measure
             bounds
             onResize={(contentRect) => {
@@ -231,14 +230,14 @@ export default class AutoSuggestInput extends React.Component {
                 </div>
                 }
             </Measure>
-            <span>Út að keyra</span>
+            <h1 className="mainHeader">Út að keyra</h1>
             <div className="headerStyleLine">
                 { 
                 this.state.dimensions.width !== -1 && <div className="headerStyleFade">{preLines().map(t => ' - ')}</div>
                 }
             </div>
-            <span className="headerStyleMini">         Making carpooling in Iceland great again</span>
-        </span>
+            <h2 className="headerStyleMini">         Making carpooling in Iceland great again</h2>
+        </div>
         <CreateNewTripButton click={this.openCreateTrip} />
         <Filter {...this.state} onFromChange={this.onFromChange} onFromSelected={this.onFromSelected} onFromClear={this.onFromClear} onToChange={this.onToChange} onToSelected={this.onToSelected} onToClear={this.onToClear} onDateChange={this.onDateChange} />
         <div className="tripHeader tripHeaderBig">
@@ -279,7 +278,7 @@ export default class AutoSuggestInput extends React.Component {
                 justify-content: center;
                 align-items: center;                
             }
-            .headerStyle {
+            .headerStyle{
                 text-shadow: 2px 2px 0 rgba(0,0,0,0.23);
                 font-size: 112px;
                 margin: 40px;
@@ -293,6 +292,12 @@ export default class AutoSuggestInput extends React.Component {
                 position:relative;
                 display:flex;
                 margin-top:-25px;
+            }
+            .mainHeader{
+                font-variant-caps: all-small-caps;
+                font-size: 112px !important;
+                margin:0 !important;
+                font-weight: 300 !important;
             }
             .headerStyleLine{
                 flex:1;
@@ -320,11 +325,13 @@ export default class AutoSuggestInput extends React.Component {
             }
             .headerStyleMini{
                 text-shadow: 1px 1px 0 rgba(0,0,0,0.23);
-                font-size: 24px;
+                font-size: 24px !important;
                 position:absolute;
                 bottom:5px;
                 left:50%;
                 transform:translate(-50%,0);
+                margin:0;
+                font-weight:100;
                 
             }
 
@@ -384,6 +391,11 @@ export default class AutoSuggestInput extends React.Component {
 
                     padding-bottom:10px;
                     padding-top:10px;
+                }
+                .mainHeader{
+                    font-variant-caps: all-small-caps;
+                    font-size:40px !important;
+                    margin:0 !important;
                 }
                 .tripHeaderBig{
                     display:none;

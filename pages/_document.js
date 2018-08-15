@@ -14,7 +14,6 @@ export default class MyDocument extends Document {
           <meta property="og:url" content="https://www.utadkeyra.is/" />
           <meta name="language" content="en"/>
           <meta httpEquiv="Content-Language" content="en" />
-          <meta httpEquiv="Content-Security-Policy" content="default-src 'self'" />
 
           <meta name="viewport" content="initial-scale=1.0, width=device-width,maximum-scale=1" />
           <meta name="og:description " content="Út að keyra makes carpooling easier in Iceland, post a ride or search for drivers to get around Iceland" />

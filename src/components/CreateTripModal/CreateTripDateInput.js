@@ -18,6 +18,9 @@ export default ({ date, onDateChange }) => (
     parseDate={parseDate}
     value={date}
     onDayChange={onDateChange}
+    inputProps= {{
+      readOnly: true
+    }}
     
   >
     <style jsx>{`

@@ -181,8 +181,7 @@ export default class CreateTripSuggestInput extends React.PureComponent {
       icon: this.props.icon,
       iconcolor: this.props.iconcolor,
       onFocus: this.onFocus,
-      onBlur: this.onBlur,
-      autoFocus:this.props.focus
+      onBlur: this.onBlur
     };
 
     // Finally, render it!

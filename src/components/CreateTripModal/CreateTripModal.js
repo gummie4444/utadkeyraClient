@@ -486,27 +486,27 @@ export default class CreateTripModal extends React.PureComponent {
                             <CreateTripDateInput date={this.state.date} onDateChange={this.onDateChange}  />
                         </CreateTripInput>
                         <CreateTripInput helpText={'hh:mm or ANY'} error={this.state.timeError} errorMsg={this.state.timeErrorMsg} marginRight={12} inputText="Time">
-                            <input value={this.state.time} onChange={this.onTimeChange} style={{ width: '100%',boxSizing:'border-box'}} className="createTripModalInputInput" type="string"/>
+                            <input maxLength="6" value={this.state.time} onChange={this.onTimeChange} style={{ width: '100%',boxSizing:'border-box'}} className="createTripModalInputInput" type="string"/>
                         </CreateTripInput>
                     </div>
                     <CreateTripInput error={this.state.nameError} errorMsg={this.state.nameErrorMsg} inputText="Name">
-                        <input className="createTripModalInputInput" onChange={this.onNameChange} value={this.state.name} />
+                        <input maxLength="30" className="createTripModalInputInput" onChange={this.onNameChange} value={this.state.name} />
                     </CreateTripInput>
                     </div>
                     <div className="createTripModalMainInputWrapper">
                     <div style={{ flex: 1 }}>
                         <CreateTripInput  error={this.state.phoneError} errorMsg={this.state.phoneErrorMsg}  inputText="Mobile">
-                            <input className="createTripModalInputInput" onChange={this.onPhoneChange} value={this.state.phone} />
+                            <input maxLength="30" className="createTripModalInputInput" onChange={this.onPhoneChange} value={this.state.phone} />
                         </CreateTripInput>
                         <CreateTripInput  error={this.state.emailError} errorMsg={this.state.emailErrorMsg}  inputText="Email">
-                            <input  type="email" className="createTripModalInputInput" onChange={this.onEmailChange} value={this.state.email} />
+                            <input maxLength="30" type="email" className="createTripModalInputInput" onChange={this.onEmailChange} value={this.state.email} />
                         </CreateTripInput>
                         <CreateTripInput  error={this.state.seatsError} errorMsg={this.state.seatsErrorMsg}  inputText={this.state.type === 2 ? 'Seats available' : 'Seats needed'}>
                             <CarSeatInput click={this.onSelectCarSeats} carSeats={this.state.seats} />
                         </CreateTripInput>
                     </div>
                     <CreateTripInput inputText="Notes">
-                        <textarea  onChange={this.onNotesChange} value={this.state.notes} className="createTripModalInputInput long" />
+                        <textarea maxLength="250"  onChange={this.onNotesChange} value={this.state.notes} className="createTripModalInputInput long" />
                     </CreateTripInput>
                     </div>
 
@@ -559,7 +559,7 @@ export default class CreateTripModal extends React.PureComponent {
                             </CreateTripInput>
                         </div>
                     <CreateTripInput inputText="Notes">
-                        <textarea maxLength="255" onChange={this.onNotesChange} value={this.state.notes} className="createTripModalInputInput long" />
+                        <textarea maxLength="200" onChange={this.onNotesChange} value={this.state.notes} className="createTripModalInputInput long" />
                     </CreateTripInput>
                 </div>
 
@@ -655,7 +655,7 @@ export default class CreateTripModal extends React.PureComponent {
     color:white;
     padding:0;
     padding-top:20px;
-    max-height:100vh;
+    max-height:100%;
     width:650px;
 }
           .createTripModalMain{
@@ -740,6 +740,7 @@ export default class CreateTripModal extends React.PureComponent {
         }
         .createTripModalInputInput.long{
             height:100%;
+            min-height:50px;
         }
         .createTripModalInputInput:focus, .createTripModalInputInput:focus{
             outline: none;

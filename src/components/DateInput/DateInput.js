@@ -40,7 +40,7 @@ export default class DateInput extends React.PureComponent {
       return (
         <div className="inputContainer" id="mainDateInput" style={{zIndex: this.state.zindex ? 300 : 2}}>
         <div className="icon">
-          <Calendar color={colors.black} height={20} />
+          <Calendar height={20} />
         </div>
         <DayPickerInput
           dayPickerProps={{
@@ -53,6 +53,8 @@ export default class DateInput extends React.PureComponent {
           parseDate={parseDate}
           value={date}
           onDayChange={onDateChange}
+          keepFocus={true}
+
           inputProps= {{
             onFocus: this.onFocus,
             onBlur: this.onBlur

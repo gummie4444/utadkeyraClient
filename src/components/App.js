@@ -26,7 +26,7 @@ input {
       height 100%;
     }
     body.modal-open{
-      overflow:hidden;
+      overflow:hidden !important;
     }
       body {
         margin: 0;

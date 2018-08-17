@@ -30,9 +30,7 @@ input {
         margin: 0;
         padding: 25px 50px;
       }
-      a {
-        color: #22bad9;
-      }
+      
       p {
         font-size: 14px;
         line-height: 24px;

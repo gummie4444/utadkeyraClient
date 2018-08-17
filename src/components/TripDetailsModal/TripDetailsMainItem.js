@@ -1,15 +1,36 @@
 import React from 'react';
 
-export default ({ type, header, value }) => (
+const renderValue = (value, header) => {
+  if (!value) {
+    return 'N/A';
+  } else if (header === 'phone') {
+    return (
+      <a href={`tel:${value}`}>{value}</a>
+    );
+  } else if (header === 'email') {
+    return (
+      <a href={`mailto:${value}`}>{value}</a>
+    );
+  }
+  return (
+    value || 'N/A'
+  );
+};
+export default ({
+  type, header, value
+}) => (
   <div className={type === 'big' ? 'tripDetailsMainItemBig' : 'tripDetailsMainItemSmall'}>
     <div className="tripDetailsMainItemHeader">
       {header}
     </div>
     <div className="tripDetailsMainItemValue">
-      {value || 'N/A'}
+      {renderValue(value, header)}
     </div>
     <style jsx>{
         `
+        .a{
+          color:black;
+        }
         .tripDetailsMainItemBig{
           flex:5;
           display:flex;

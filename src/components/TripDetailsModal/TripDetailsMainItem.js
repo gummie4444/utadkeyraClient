@@ -28,7 +28,7 @@ export default ({
     </div>
     <style jsx>{
         `
-        .a{
+        a{
           color:black;
         }
         .tripDetailsMainItemBig{
